@@ -1,40 +1,69 @@
 import React from "react";
-import Select from "react-select";
+import axios from "axios";
 import { useState } from "react";
 
 const BasicForm = () => {
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [contactNO, setContactNO] = useState("");
   const [gender, setGender] = useState("");
-  const [selects, setSelects] = useState("");
+  const [vehicleType, setVehicleType] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
-    //call backend login api here.
+    //call backend register api here.
+    const registerPayload = {
+      name,
+      username,
+      password,
+      role: "user",
+      gender,
+      vehicleType,
+    };
+
+    axios
+      .post("http://localhost:3001/user/register", registerPayload)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <>
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label htmlFor="exampleInputUsername1">Username</label>
+          <label htmlFor="Inputname">name</label>
           <input
-            type="username"
+            type="text"
             className="form-control"
-            id="exampleInputUsername1"
+            id="Inputname"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Enter name"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="InputUsername">Username</label>
+          <input
+            type="text"
+            className="form-control"
+            id="InputUsername"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter username"
           />
         </div>
         <div className="form-group my-3">
-          <label htmlFor="exampleInputEmail1">Email address</label>
+          <label htmlFor="InputEmail">Email address</label>
           <input
-            type="email"
+            type="text"
             className="form-control"
-            id="exampleInputEmail1"
+            id="InputEmail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             aria-describedby="emailHelp"
@@ -45,29 +74,29 @@ const BasicForm = () => {
           </small>
         </div>
         <div className="form-group my-3">
-          <label htmlFor="exampleInputPassword1">Password</label>
+          <label htmlFor="InputPassword">Password</label>
           <input
             type="password"
             className="form-control"
-            id="exampleInputPassword1"
+            id="InputPassword"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
         </div>
         <div className="form-group my-3">
-          <label htmlFor="exampleInputcontactNo1">ContactNo</label>
+          <label htmlFor="InputcontactNo">ContactNo</label>
           <input
             type="contactNO"
             className="form-control"
-            id="exampleInputcontactNo1"
+            id="InputcontactNo"
             value={contactNO}
             onChange={(e) => setContactNO(e.target.value)}
             placeholder="Enter number"
           />
         </div>
         <div className="form-group my-3">
-          <label htmlFor="exampleInputgender1">Gender</label>
+          <label htmlFor="Inputgender">Gender</label>
           <input
             type="radio"
             value="FEMALE"
@@ -87,9 +116,9 @@ const BasicForm = () => {
           <select
             name="vehicle-Type"
             style={{ width: "200px" }}
-            value={selects}
+            value={vehicleType}
             onChange={(e) => {
-              setSelects(e.target.value);
+              setVehicleType(e.target.value);
             }}
           >
             <option value="" disabled>
