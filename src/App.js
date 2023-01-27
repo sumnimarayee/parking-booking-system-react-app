@@ -1,10 +1,17 @@
-import BasicForm from "./Components/Forms/BasicForm";
+import Register from "./Components/Register";
+import Login from "./Components/Login";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div>
-      <BasicForm />
-    </div>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
