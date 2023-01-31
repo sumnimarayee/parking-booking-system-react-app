@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { BASE_URL } from "../utils/Constants";
 import { useState } from "react";
 
 const Login = () => {
@@ -34,7 +35,7 @@ const Login = () => {
       };
 
       axios
-        .post("http://localhost:3002/user/login", loginPayload)
+        .post(BASE_URL + "/user/login", loginPayload)
         .then((response) => {
           localStorage.setItem("access_token", response.data.token);
           localStorage.setItem("refresh_token", response.data.refreshToken);
