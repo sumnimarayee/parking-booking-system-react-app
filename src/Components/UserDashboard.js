@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { parkData } from "../data/skateboard-park";
-// import { Link, useNavigate } from "react-router-dom";
 
 export default function UserDashboard() {
   // const navigate = useNavigate();

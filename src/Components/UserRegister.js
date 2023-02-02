@@ -4,7 +4,6 @@ import { useState } from "react";
 import { BASE_URL } from "../utils/Constants";
 
 const Register = () => {
-  // const initialFormValues = "abc";
   const initialFormValues = {
     name: "",
     username: "",
