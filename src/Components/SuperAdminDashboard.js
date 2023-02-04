@@ -41,13 +41,6 @@ const SuperAdminDashboard = () => {
               <td>{row.location}</td>
               <td>{row.managingStaffName}</td>
               <td>
-                {/* <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={() => handleDelete(index)}
-                >
-                  Delete
-                </button> */}
                 <span
                   className=" bi bi-trash"
                   onClick={() => handleDelete(index)}

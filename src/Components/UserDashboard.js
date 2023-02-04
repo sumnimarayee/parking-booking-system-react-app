@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { parkData } from "../data/skateboard-park";
+import { BASE_URL } from "../utils/Constants";
+import axios from "axios";
 
 export default function UserDashboard() {
   // const navigate = useNavigate();
   const [lat, setLat] = useState(27.700769);
   const [lng, setLng] = useState(85.30014);
   const [selectedPark, setSelectedPark] = useState(null);
+  const [parkingLots, setParkingLots] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(`${BASE_URL}/user/parkinglots`);
+      setParkingLots(response.data.data);
+    }
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -26,11 +36,11 @@ export default function UserDashboard() {
         // zoom={10}
         mapStyle="mapbox://styles/mapbox/streets-v12"
       >
-        {parkData.features.map((park) => (
+        {parkingLots.map((park) => (
           <Marker
-            key={park.properties.PARK_ID}
-            latitude={park.geometry.coordinates[1]}
-            longitude={park.geometry.coordinates[0]}
+            key={park._id}
+            latitude={park.latitude}
+            longitude={park.longitude}
           >
             <button
               className="marker-btn"
@@ -42,12 +52,13 @@ export default function UserDashboard() {
               <img
                 src={require("../assets/parking-marker.png")}
                 alt="parking icon"
+                style={{
+                  background: "rgba(255, 122, 89, 0.5)",
+                }}
               />
             </button>
           </Marker>
         ))}
-
-        {selectedPark ? console.log("selected park is true true") : null}
 
         {selectedPark ? (
           <Popup
@@ -59,8 +70,8 @@ export default function UserDashboard() {
             }}
           >
             <div>
-              <h2>{selectedPark.properties.NAME}</h2>
-              <p>{selectedPark.properties.DESCRIPTIO}</p>
+              <h2>{selectedPark.name}</h2>
+              <p>{selectedPark.name}</p>
             </div>
           </Popup>
         ) : null}
