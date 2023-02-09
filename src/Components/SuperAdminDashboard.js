@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsFillTrashFill } from "react-icons/bs";
+import axios from "axios";
+import { BASE_URL } from "../utils/Constants";
 
 const SuperAdminDashboard = () => {
-  const [data, setData] = useState([
-    { name: "Company 1", location: "New York", managingStaffName: "John Doe" },
-    { name: "Company 2", location: "London", managingStaffName: "Jane Doe" },
-    { name: "Company 3", location: "Paris", managingStaffName: "Jim Smith" },
-  ]);
+  const [data, setData] = useState([]);
 
   const handleDelete = (index) => {
     const newData = [...data];
@@ -20,6 +18,14 @@ const SuperAdminDashboard = () => {
     let path = "/add-parkinglot";
     navigate(path);
   };
+
+  useEffect(() => {
+    async function fetch() {
+      const fetchedData = await axios.get(`${BASE_URL}/parking-lot/`);
+      setData(fetchedData.data.data);
+    }
+    fetch();
+  }, []);
 
   return (
     <>
@@ -39,7 +45,7 @@ const SuperAdminDashboard = () => {
             <tr key={index}>
               <td>{row.name}</td>
               <td>{row.location}</td>
-              <td>{row.managingStaffName}</td>
+              <td>{row.longitude}</td>
               <td>
                 <span
                   className=" bi bi-trash"

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { BASE_URL } from "../utils/Constants";
 import axios from "axios";
 
 export default function UserDashboard() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [lat, setLat] = useState(27.700769);
   const [lng, setLng] = useState(85.30014);
   const [selectedPark, setSelectedPark] = useState(null);
@@ -13,7 +14,7 @@ export default function UserDashboard() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`${BASE_URL}/user/parkinglots`);
+      const response = await axios.get(`${BASE_URL}/parking-lot`);
       setParkingLots(response.data.data);
     }
     fetchData();
@@ -62,8 +63,8 @@ export default function UserDashboard() {
 
         {selectedPark ? (
           <Popup
-            latitude={selectedPark.geometry.coordinates[1]}
-            longitude={selectedPark.geometry.coordinates[0]}
+            latitude={selectedPark.latitude}
+            longitude={selectedPark.longitude}
             closeOnClick={false}
             onClose={() => {
               setSelectedPark(null);
@@ -72,6 +73,15 @@ export default function UserDashboard() {
             <div>
               <h2>{selectedPark.name}</h2>
               <p>{selectedPark.name}</p>
+              <button
+                onClick={() => {
+                  navigate("/book", {
+                    state: { parkingLotId: selectedPark._id },
+                  });
+                }}
+              >
+                Book
+              </button>
             </div>
           </Popup>
         ) : null}
