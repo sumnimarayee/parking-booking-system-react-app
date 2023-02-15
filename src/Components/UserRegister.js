@@ -63,7 +63,7 @@ const Register = () => {
       };
 
       axios
-        .post(BASE_URL + "/user/register", registerPayload)
+        .post(BASE_URL + "/register-user", registerPayload)
         .then((data) => {
           console.log(data);
         })

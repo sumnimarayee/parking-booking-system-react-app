@@ -58,7 +58,7 @@ const AddParkingLot = () => {
     setErrorHolder(err);
     if (Object.keys(err).length === 0) {
       axios
-        .post(BASE_URL + "/super-admin/parking-lot", {
+        .post(BASE_URL + "/parking-lot", {
           longitude: markerPosition.lng,
           latitude: markerPosition.lat,
           ...parkingLotData,
