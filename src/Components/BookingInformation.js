@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/Constants";
 
 const BookingInformation = () => {
   const { state } = useLocation();
   const { parkingLotId } = state;
   const [parkingLot, setParkingLot] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetch() {
@@ -15,7 +16,6 @@ const BookingInformation = () => {
     }
     fetch();
   }, []);
-  console.log(parkingLot);
   return (
     <div>
       <h1>Parking Lot</h1>
@@ -43,10 +43,26 @@ const BookingInformation = () => {
       <p className="carCostPerHour">
         carParkingCostPerHour: {parkingLot.carParkingCostPerHour}
       </p>
-      <button type="button" class="btn btn-outline-info">
+      <button
+        type="button"
+        class="btn btn-outline-info"
+        onClick={() => {
+          navigate("/test", {
+            state: { vehicleType: "fourWheeler", parkingLotId: parkingLot._id },
+          });
+        }}
+      >
         Car
       </button>
-      <button type="button" class="btn btn-outline-info">
+      <button
+        type="button"
+        class="btn btn-outline-info"
+        onClick={() => {
+          navigate("/test", {
+            state: { vehicleType: "twoWheeler", parkingLotId: parkingLot._id },
+          });
+        }}
+      >
         Bike
       </button>
     </div>

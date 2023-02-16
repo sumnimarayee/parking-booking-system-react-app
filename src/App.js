@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddParkingLot from "./Components/AddParkingLot";
 import ParkingRegister from "./Components/ParkingRegister";
 import BookingInformation from "./Components/BookingInformation";
+import TimeSelection from "./Components/TimeSelection";
+import Esewa from "./Components/Esewa";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           />
           <Route path="/add-parkinglot" element={<AddParkingLot />} />
           <Route path="/book" element={<BookingInformation />} />
+          <Route path="/test" element={<TimeSelection />} />
+          <Route path="/parking-payment" element={<Esewa />} />
         </Routes>
       </Router>
     </>
