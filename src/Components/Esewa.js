@@ -6,12 +6,14 @@ import axios from "axios";
 
 const Esewa = () => {
   const { state } = useLocation();
-  const { startTime, endTime, parkingLotId, vehicleType } = state;
-  const [pinNO, setPinNO] = useState("");
+  const { startTime, endTime, parkingLotId, vehicleType, vehiclePlateNo } =
+    state;
+  const [pinNo, setPinNo] = useState("");
   const [parkingLot, setParkingLot] = useState({});
   useEffect(() => {
     async function fetch() {
       const data = await axios.get(`${BASE_URL}/parking-lot/${parkingLotId}`);
+      // console.log(data);
       setParkingLot(data.data.data);
     }
     fetch();
@@ -28,6 +30,31 @@ const Esewa = () => {
     const totalCost = totalHourCost + totalMinuteCost;
     return totalCost;
   };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const bookingPayload = {
+      bookedParkingLot: parkingLotId,
+      vehicleType,
+      vehiclePlateNo,
+      bookedTime: `${startTime}-${endTime}`,
+      pinNo,
+    };
+    console.log(bookingPayload);
+    axios
+      .post(`${BASE_URL}/booking`, bookingPayload, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       <p className="startTime">startTime: {startTime}</p>
@@ -48,12 +75,11 @@ const Esewa = () => {
 
       <input
         type="text"
-        value={pinNO}
-        onChange={(e) => setPinNO(e.target.value)}
+        value={pinNo}
+        onChange={(e) => setPinNo(e.target.value)}
       />
-      <button>Confrim Booking</button>
+      <button onClick={onSubmit}>Confrim Booking</button>
     </div>
   );
 };
-
 export default Esewa;

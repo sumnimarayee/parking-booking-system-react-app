@@ -12,6 +12,7 @@ const TimeSelection = () => {
   const { parkingLotId, vehicleType } = state;
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const [vehiclePlateNo, setVehiclePlateNo] = useState("");
 
   useEffect(() => {
     async function fetch() {
@@ -62,6 +63,7 @@ const TimeSelection = () => {
           endTime,
           parkingLotId: parkingLot._id,
           vehicleType,
+          vehiclePlateNo,
         },
       });
     }
@@ -89,6 +91,12 @@ const TimeSelection = () => {
         // maxTime="21:10"
         // minTime="8:30"
         required
+      />
+      <label htmlFor="InputvehiclePlateNo">vehiclePlateNo</label>
+      <input
+        type="text"
+        value={vehiclePlateNo}
+        onchange={(e) => setVehiclePlateNo(e.target.value)}
       />
       {/* add a continue button which when clicked performs a validation and after validation is success call esewa payment page. */}
       <button onClick={() => validateTimeSelection()}>continue</button>

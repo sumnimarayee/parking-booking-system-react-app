@@ -4,7 +4,6 @@ import UserDashboard from "./Components/UserDashboard";
 import SuperAdminDashboard from "./Components/SuperAdminDashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddParkingLot from "./Components/AddParkingLot";
-import ParkingRegister from "./Components/ParkingRegister";
 import BookingInformation from "./Components/BookingInformation";
 import TimeSelection from "./Components/TimeSelection";
 import Esewa from "./Components/Esewa";
