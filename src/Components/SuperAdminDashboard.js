@@ -21,7 +21,7 @@ const SuperAdminDashboard = () => {
 
   useEffect(() => {
     async function fetch() {
-      const fetchedData = await axios.get(`${BASE_URL}/parking-lot/`);
+      const fetchedData = await axios.get(`${BASE_URL}/parking-lot`);
       setData(fetchedData.data.data);
     }
     fetch();

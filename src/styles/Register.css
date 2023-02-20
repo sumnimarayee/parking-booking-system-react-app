@@ -1,0 +1,14 @@
+.register-main-wrapper {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+.register-form-body {
+  margin: 0;
+  position: absolute;
+  top: 10%;
+  left: 37%;
+  width: 25%;
+  margin: auto;
+}

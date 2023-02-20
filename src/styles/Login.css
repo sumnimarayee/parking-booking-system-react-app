@@ -1,0 +1,38 @@
+.login-main-wrapper {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+.login-main-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../assets/login-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.8;
+  z-index: -1;
+}
+
+.login-form-body {
+  margin: 0;
+  position: absolute;
+  top: 30%;
+  left: 37%;
+  width: 25%;
+  margin: auto;
+}
+
+.input-field {
+  margin-top: 10px;
+}
+
+.form-error-message {
+  color: red;
+  text-align: left;
+  font-size: small;
+}

@@ -1,0 +1,19 @@
+.logo-holder {
+  object-fit: cover;
+  /* padding: 10px 0 0 10px; */
+  font-size: 38px;
+  font-family: "Georgia", "Courier New", monospace;
+  color: #632121;
+  /* font-weight: bold; */
+  /* color: ; */
+}
+
+.website-name {
+  padding-left: 20px;
+  display: inline;
+}
+
+.logo-holder img {
+  height: 50px;
+  width: 50px;
+}

@@ -4,6 +4,7 @@ import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { BASE_URL } from "../utils/Constants";
 import axios from "axios";
+import Loader from "./Common/Loader";
 
 export default function UserDashboard() {
   const navigate = useNavigate();
@@ -11,17 +12,21 @@ export default function UserDashboard() {
   const [lng, setLng] = useState(85.30014);
   const [selectedPark, setSelectedPark] = useState(null);
   const [parkingLots, setParkingLots] = useState([]);
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
+    setLoader(true);
     async function fetchData() {
       const response = await axios.get(`${BASE_URL}/parking-lot`);
       setParkingLots(response.data.data);
+      setLoader(false);
     }
     fetchData();
   }, []);
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
+      {loader ? <Loader></Loader> : ""}
       <ReactMapGL
         mapboxAccessToken="pk.eyJ1Ijoic3VuaW1hcmFpIiwiYSI6ImNsZGlsazEweTBrY28zb21laXlhbXdkc2UifQ.DybhcrubRyxmhs6ZvfGnXw"
         style={{
