@@ -30,10 +30,10 @@ export default function UserDashboard() {
       <ReactMapGL
         mapboxAccessToken="pk.eyJ1Ijoic3VuaW1hcmFpIiwiYSI6ImNsZGlsazEweTBrY28zb21laXlhbXdkc2UifQ.DybhcrubRyxmhs6ZvfGnXw"
         style={{
-          width: window.innerWidth,
+          // width: window.innerWidth,
           height: window.innerHeight,
-          borderRadius: "15px",
-          border: "2px solid red",
+          // borderRadius: "15px",
+          // border: "2px solid red",
         }}
         initialViewState={{
           latitude: lat,

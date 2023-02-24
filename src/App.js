@@ -11,26 +11,51 @@ import Sidebar from "./Components/sidebar/Sidebar";
 
 function App() {
   return (
-    <div style={{ display: "flex" }}>
-      <Sidebar />
-      <div>
-        <Router>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/user-dashboard" element={<UserDashboard />} />
-            <Route
-              path="/superAdmin-dashboard"
-              element={<SuperAdminDashboard />}
-            />
-            <Route path="/add-parkinglot" element={<AddParkingLot />} />
-            <Route path="/book" element={<BookingInformation />} />
-            <Route path="/test" element={<TimeSelection />} />
-            <Route path="/parking-payment" element={<Esewa />} />
-          </Routes>
-        </Router>
+    <div class="container-fluid">
+      <div class="row">
+        {/* <div class="col-sm-2" style={{ padding: "0" }}>
+          <Sidebar />
+        </div> */}
+        <div class="col-sm-12" style={{ padding: "0" }}>
+          <Router>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/user-dashboard" element={<UserDashboard />} />
+              <Route
+                path="/superAdmin-dashboard"
+                element={<SuperAdminDashboard />}
+              />
+              <Route path="/add-parkinglot" element={<AddParkingLot />} />
+              <Route path="/book" element={<BookingInformation />} />
+              <Route path="/test" element={<TimeSelection />} />
+              <Route path="/parking-payment" element={<Esewa />} />
+            </Routes>
+          </Router>
+        </div>
       </div>
     </div>
+
+    // <div style={{ display: "flex" }}>
+    //   <Sidebar />
+    //   <div>
+    //     <Router>
+    //       <Routes>
+    //         <Route path="/login" element={<Login />} />
+    //         <Route path="/register" element={<Register />} />
+    //         <Route path="/user-dashboard" element={<UserDashboard />} />
+    //         <Route
+    //           path="/superAdmin-dashboard"
+    //           element={<SuperAdminDashboard />}
+    //         />
+    //         <Route path="/add-parkinglot" element={<AddParkingLot />} />
+    //         <Route path="/book" element={<BookingInformation />} />
+    //         <Route path="/test" element={<TimeSelection />} />
+    //         <Route path="/parking-payment" element={<Esewa />} />
+    //       </Routes>
+    //     </Router>
+    //   </div>
+    // </div>
   );
 }
 
