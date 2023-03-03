@@ -71,12 +71,12 @@ const AddParkingLot = () => {
 
   return (
     <div>
-      <Modal
+      {/* <Modal
         modalState={showModal}
         closeModal={() => hideModal()}
         content="provide all the required field"
         title="Error"
-      />
+      /> */}
       <ReactMapGL
         mapboxAccessToken="pk.eyJ1Ijoic3VuaW1hcmFpIiwiYSI6ImNsZGlsazEweTBrY28zb21laXlhbXdkc2UifQ.DybhcrubRyxmhs6ZvfGnXw"
         style={{
@@ -164,7 +164,6 @@ const AddParkingLot = () => {
           }
           updateSearchLocation={() => updateLocationBySearch}
         ></Geocoder>
-        ;
       </ReactMapGL>
       <p>The created parking lot name is: {parkingLotData.name}, </p>
       <p>The createdparking lot location is: {parkingLotData.location}</p>

@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Modal from "../Components/Modals/SuccessModal";
 import "../styles/Register.css";
 import {
-  MDBBtn,
   MDBContainer,
   MDBCard,
   MDBCardBody,
@@ -64,12 +63,6 @@ function Register() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setModal({
-      show: true,
-      title: "User Registered Successfully",
-      Message: "",
-      type: "success",
-    });
     const err = validateRegistration();
     setFormErrors(err);
     if (Object.keys(err).length === 0) {
@@ -84,23 +77,25 @@ function Register() {
         vehicleType: formValues.vehicleType,
       };
 
-      // axios
-      //   .post(BASE_URL + "/register-user", registerPayload)
-      //   .then((data) => {
-      //     console.log(data);
-      //     setLoader(false);
-      //     setModal({
-      //       show: true,
-      //       title: "User Registered Successfully",
-      //       Message: "",
-      //       type: "success",
-      //     });
-      //     navigate("/login");
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //     setLoader(false);
-      //   });
+      axios
+        .post(BASE_URL + "/register-user", registerPayload)
+        .then((data) => {
+          console.log(data);
+          setLoader(false);
+          setModal({
+            show: true,
+            title: "User Registered Successfully",
+            Message: "",
+            type: "success",
+          });
+          setTimeout(() => {
+            navigate("/login");
+          }, 3000);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoader(false);
+        });
     }
   };
 
@@ -212,7 +207,7 @@ function Register() {
                           name="inlineRadioOptions"
                           id="inlineRadio1"
                           value="Female"
-                          checked={false}
+                          checked={formValues.gender === "Female"}
                           onChange={(e) => {
                             setFormValues({
                               ...formValues,

@@ -11,14 +11,12 @@
 }
 
 .modalContainer {
-  width: 250px;
+  width: 300px;
   height: auto;
   border-radius: 12px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  /* display: flex; */
-  /* flex-direction: column; */
-  padding: 25px;
+  padding: 2px;
 }
 
 .modalContainer .title {
@@ -31,12 +29,14 @@
 .titleCloseBtn {
   display: flex;
   justify-content: flex-end;
+  /* height: 0px; */
 }
 
 .titleCloseBtn button {
   background-color: transparent;
   border: none;
   font-size: 25px;
+  font-weight: bold;
   cursor: pointer;
   color: red;
 }
@@ -75,5 +75,5 @@
 
 .body .success-gif img {
   object-fit: contain;
-  height: 100px;
+  height: 150px;
 }

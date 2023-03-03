@@ -13,10 +13,10 @@ function App() {
   return (
     <div class="container-fluid">
       <div class="row">
-        {/* <div class="col-sm-2" style={{ padding: "0" }}>
+        <div class="col-sm-2" style={{ padding: "0" }}>
           <Sidebar />
-        </div> */}
-        <div class="col-sm-12" style={{ padding: "0" }}>
+        </div>
+        <div class="col-sm-10" style={{ padding: "0" }}>
           <Router>
             <Routes>
               <Route path="/login" element={<Login />} />
@@ -28,7 +28,7 @@ function App() {
               />
               <Route path="/add-parkinglot" element={<AddParkingLot />} />
               <Route path="/book" element={<BookingInformation />} />
-              <Route path="/test" element={<TimeSelection />} />
+              <Route path="/time-selection" element={<TimeSelection />} />
               <Route path="/parking-payment" element={<Esewa />} />
             </Routes>
           </Router>

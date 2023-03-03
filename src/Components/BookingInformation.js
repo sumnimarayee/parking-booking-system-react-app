@@ -58,7 +58,7 @@ const BookingInformation = () => {
         type="button"
         class="btn btn-outline-info"
         onClick={() => {
-          navigate("/test", {
+          navigate("/time-selection", {
             state: { vehicleType: "twoWheeler", parkingLotId: parkingLot._id },
           });
         }}

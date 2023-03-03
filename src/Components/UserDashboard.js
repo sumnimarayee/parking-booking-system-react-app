@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import ReactMapGL, {
+  GeolocateControl,
+  Marker,
+  NavigationControl,
+  Popup,
+} from "react-map-gl";
+import Geocoder from "./Common/Geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { BASE_URL } from "../utils/Constants";
 import axios from "axios";
 import Loader from "./Common/Loader";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import "../styles/UserDashboard.css";
 
 export default function UserDashboard() {
   const navigate = useNavigate();
@@ -12,7 +20,63 @@ export default function UserDashboard() {
   const [lng, setLng] = useState(85.30014);
   const [selectedPark, setSelectedPark] = useState(null);
   const [parkingLots, setParkingLots] = useState([]);
+  // const [zoomLevel, setZoomLevel] = useState(12);
   const [loader, setLoader] = useState(false);
+  const [priceFilterValues, setPriceFilterValues] = useState({
+    vehicleType: "twoWheeler",
+  });
+  // const [errorPriceFilterValues, setErrorPriceFilterValues] = useState({});
+
+  const updateLocationBySearch = (lng, lat) => {
+    setLat(lat);
+    setLng(lng);
+  };
+
+  const onClickPriceFilter = async (e) => {
+    e.preventDefault();
+    console.log("onclickeddddd");
+    let queryParam = `?vehicleType=${priceFilterValues.vehicleType}`;
+    //validation
+    if (
+      priceFilterValues.minPrice !== null &&
+      priceFilterValues.minPrice !== undefined
+    ) {
+      const numberOnlyRegex = /^[0-9]*$/;
+      if (!numberOnlyRegex.test(priceFilterValues.minPrice)) {
+        //show error modal popup
+      }
+    }
+    if (
+      priceFilterValues.maxPrice !== null &&
+      priceFilterValues.maxPrice !== undefined
+    ) {
+      const numberOnlyRegex = /^[0-9]*$/;
+      if (!numberOnlyRegex.test(priceFilterValues.maxPrice)) {
+        //show error modal popup
+      }
+    }
+
+    if (
+      priceFilterValues.minPrice !== null &&
+      priceFilterValues.minPrice !== undefined &&
+      priceFilterValues.maxPrice !== null &&
+      priceFilterValues.maxPrice !== undefined
+    ) {
+      if (priceFilterValues.minPrice > priceFilterValues.maxPrice) {
+        // show error modal popup
+      }
+    }
+    if (priceFilterValues.minPrice) {
+      queryParam += `&minPrice=${priceFilterValues.minPrice}`;
+    }
+    if (priceFilterValues.maxPrice) {
+      queryParam += `&maxPrice=${priceFilterValues.maxPrice}`;
+    }
+    if (priceFilterValues.minPrice || priceFilterValues.maxPrice) {
+      const response = await axios.get(`${BASE_URL}/parking-lot${queryParam}`);
+      setParkingLots(response.data.data);
+    }
+  };
 
   useEffect(() => {
     setLoader(true);
@@ -27,6 +91,59 @@ export default function UserDashboard() {
   return (
     <div style={{ position: "relative" }}>
       {loader ? <Loader></Loader> : ""}
+      <div className="booking-filter-container">
+        <div className="price-filter-container">
+          <label>Price</label>
+          <div className="min-price">
+            <input
+              className="price-input"
+              type="number"
+              placeholder="min"
+              value={priceFilterValues.minPrice}
+              onChange={(e) => {
+                setPriceFilterValues({
+                  ...priceFilterValues,
+                  minPrice: e.target.value,
+                });
+              }}
+            />
+          </div>
+          -
+          <div className="max-price">
+            <input
+              className="price-input"
+              type="number"
+              placeholder="max"
+              value={priceFilterValues.maxPrice}
+              onChange={(e) => {
+                setPriceFilterValues({
+                  ...priceFilterValues,
+                  maxPrice: e.target.value,
+                });
+              }}
+            />
+          </div>
+          <div>
+            <select
+              class="form-select"
+              aria-label="Select Vehicle Type"
+              value={priceFilterValues.vehicleType}
+              onChange={(e) => {
+                setPriceFilterValues({
+                  ...priceFilterValues,
+                  vehicleType: e.target.value,
+                });
+              }}
+            >
+              <option value="twoWheeler">2 Wheeler</option>
+              <option value="fourWheeler">4 Wheeler</option>
+            </select>
+          </div>
+          <button onClick={(e) => onClickPriceFilter(e)}>
+            <FilterAltIcon />
+          </button>
+        </div>
+      </div>
       <ReactMapGL
         mapboxAccessToken="pk.eyJ1Ijoic3VuaW1hcmFpIiwiYSI6ImNsZGlsazEweTBrY28zb21laXlhbXdkc2UifQ.DybhcrubRyxmhs6ZvfGnXw"
         style={{
@@ -39,7 +156,8 @@ export default function UserDashboard() {
           latitude: lat,
           longitude: lng,
         }}
-        // zoom={10}
+        // zoom={zoomLevel}
+        // onZoom={(e) => setZoomLevel(e.viewState.zoom)}
         mapStyle="mapbox://styles/mapbox/streets-v12"
       >
         {parkingLots.map((park) => (
@@ -90,6 +208,21 @@ export default function UserDashboard() {
             </div>
           </Popup>
         ) : null}
+        <NavigationControl position="bottom-right" />
+        <GeolocateControl
+          position="top-left"
+          trackUserLocation
+          onGeolocate={(e) => {
+            setLng(e.coords.longitude);
+            setLat(e.coords.latitude);
+          }}
+        />
+        <Geocoder
+          accessToken={
+            "pk.eyJ1Ijoic3VuaW1hcmFpIiwiYSI6ImNsZGlsazEweTBrY28zb21laXlhbXdkc2UifQ.DybhcrubRyxmhs6ZvfGnXw"
+          }
+          updateSearchLocation={() => updateLocationBySearch}
+        ></Geocoder>
       </ReactMapGL>
       {/* <button onClick={() => navigate("/register")}>Click to Register</button>
       <button onClick={() => navigate("/login")}>Click to go login</button> */}

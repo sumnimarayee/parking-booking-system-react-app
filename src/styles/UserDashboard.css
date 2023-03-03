@@ -1,0 +1,38 @@
+.booking-filter-container {
+  height: 32px;
+  /* background: red; */
+  border: 1px solid skyblue;
+  margin: 5px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.price-filter-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #d8d0e9;
+  padding: 0px 5px;
+  margin: 2px;
+  /* border: 1px solid red; */
+  border-radius: 7px;
+}
+.price-filter-container .price-input {
+  width: 80px;
+  margin: 0px 5px 0px 5px;
+  height: 22px;
+  /* vertical-align: middle; */
+}
+
+.price-filter-container button {
+  border: none;
+  background-color: transparent;
+  /* margin: 2px; */
+  /* vertical-align: middle; */
+}
+
+.price-filter-container .form-select {
+  height: 24px;
+  font-size: 12px;
+  line-height: 9px;
+}
