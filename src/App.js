@@ -8,17 +8,19 @@ import BookingInformation from "./Components/BookingInformation";
 import TimeSelection from "./Components/TimeSelection";
 import Esewa from "./Components/Esewa";
 import Sidebar from "./Components/sidebar/Sidebar";
+import InitialUpdate from "./Components/StaffProfileUpdate/InitialUpdate";
 
 function App() {
   return (
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-2" style={{ padding: "0" }}>
+        {/* <div class="col-sm-2" style={{ padding: "0" }}>
           <Sidebar />
-        </div>
-        <div class="col-sm-10" style={{ padding: "0" }}>
+        </div> */}
+        <div class="col-sm-12" style={{ padding: "0" }}>
           <Router>
             <Routes>
+              <Route path="/" element={<InitialUpdate />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/user-dashboard" element={<UserDashboard />} />

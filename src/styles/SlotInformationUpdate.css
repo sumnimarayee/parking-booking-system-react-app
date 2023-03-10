@@ -1,0 +1,39 @@
+.slot-update-action-container {
+  height: 100%;
+
+  /* position: absolute; */
+}
+.slot-update-action-container .slot-update-topic {
+  padding-bottom: 50px;
+  border-bottom: 1px solid lightblue;
+}
+
+.slot-update-action-container .slot-update-body {
+  margin-top: 50px;
+}
+
+.slot-update-action-container form {
+  margin-top: 30px;
+  font-size: 22px;
+}
+
+.slot-update-action-container form input {
+  height: 50px;
+  font: 16px;
+  width: 80%;
+  display: block;
+  margin-bottom: 25px;
+}
+
+.slot-update-action-container .staff-update-button-holder {
+  position: absolute;
+  bottom: 120px;
+}
+
+.slot-update-action-container .staff-update-button-holder button {
+  width: 260px;
+}
+
+.slot-update-action-container form label {
+  margin-bottom: 5px;
+}

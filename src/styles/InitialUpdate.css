@@ -1,0 +1,57 @@
+.initial-parking-lot-update-container .left-container {
+  padding: 25px 10px 25px 30px;
+  height: 100vh;
+  border-right: 1px solid lightblue;
+}
+
+.initial-parking-lot-update-container .right-container {
+  padding: 25px 0px 25px 40px;
+  height: 100vh;
+}
+.initial-parking-lot-update-container .progress-bar {
+  padding: 20px 0px 20px 15px;
+  height: 100vh;
+}
+
+.initial-parking-lot-update-container .progress-card {
+  background-color: royalblue;
+  padding: 20px;
+  margin: 55px 0px;
+}
+
+.initial-parking-lot-update-container .progress-card {
+  margin-right: 25px;
+  border: 1px solid gray;
+  border-radius: 25px;
+}
+
+.initial-parking-lot-update-container .progress-information {
+  display: inline-block;
+  /* width: 80%; */
+  margin: 0px 0px 0px 10px;
+  font-size: 20px;
+}
+
+.initial-parking-lot-update-container .progress-heading {
+  font-weight: bold;
+  font-size: 32px;
+}
+
+.initial-parking-lot-update-container .action-item-holder li {
+  list-style-type: none;
+  border-bottom: 1px solid lightblue;
+}
+
+.initial-parking-lot-update-container .action-item-holder .item {
+  padding: 20px 0px;
+}
+
+.initial-parking-lot-update-container .action-item-holder .action-item-heading {
+  font-size: 26px;
+  font-weight: bold;
+}
+.initial-parking-lot-update-container
+  .action-item-holder
+  .action-item-description {
+  font-size: 18px;
+}

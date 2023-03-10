@@ -55,6 +55,16 @@ function Login() {
         .then((response) => {
           localStorage.setItem("access_token", response.data.token);
           localStorage.setItem("refresh_token", response.data.refreshToken);
+          if (response.isBookingUser) {
+            localStorage.setItem("role", "user");
+            //redirect
+          }
+          if (response.isStaff) {
+            localStorage.setItem("role", "staff");
+          }
+          if (response.isSuperAdmin) {
+            localStorage.setItem("role", "admin");
+          }
           setLoader(false);
           // redirect to the appropriate landing page
         })

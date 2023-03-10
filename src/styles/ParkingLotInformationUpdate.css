@@ -1,0 +1,39 @@
+.parking-update-action-container {
+  height: 100%;
+
+  /* position: absolute; */
+}
+.parking-update-action-container .parking-update-topic {
+  padding-bottom: 50px;
+  border-bottom: 1px solid lightblue;
+}
+
+.parking-update-action-container .parking-update-body {
+  margin-top: 50px;
+}
+
+.parking-update-action-container form {
+  margin-top: 30px;
+  font-size: 22px;
+}
+
+.parking-update-action-container form input {
+  height: 50px;
+  font: 16px;
+  width: 80%;
+  display: block;
+  margin-bottom: 25px;
+}
+
+.parking-update-action-container .staff-update-button-holder {
+  position: absolute;
+  bottom: 120px;
+}
+
+.parking-update-action-container .staff-update-button-holder button {
+  width: 260px;
+}
+
+.parking-update-action-container form label {
+  margin-bottom: 5px;
+}

@@ -1,0 +1,6 @@
+.dropzone {
+  border: 1px solid lightblue;
+  height: 30%;
+  width: 50%;
+  border-radius: 25px;
+}
