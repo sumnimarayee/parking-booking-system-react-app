@@ -45,6 +45,15 @@
 .initial-parking-lot-update-container .action-item-holder .item {
   padding: 20px 0px;
 }
+.initial-parking-lot-update-container .action-item-holder .item:hover {
+  /* padding: 20px 0px; */
+  background-color: lavender;
+  cursor: pointer;
+}
+
+.initial-parking-lot-update-container .action-item-holder .selected-item {
+  background-color: lavender;
+}
 
 .initial-parking-lot-update-container .action-item-holder .action-item-heading {
   font-size: 26px;

@@ -9,6 +9,7 @@ import TimeSelection from "./Components/TimeSelection";
 import Esewa from "./Components/Esewa";
 import Sidebar from "./Components/sidebar/Sidebar";
 import InitialUpdate from "./Components/StaffProfileUpdate/InitialUpdate";
+import StaffDashboard from "./Components/StaffDashboard/StaffDashboard";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
         <div class="col-sm-12" style={{ padding: "0" }}>
           <Router>
             <Routes>
-              <Route path="/" element={<InitialUpdate />} />
+              {/* <Route path="/" element={<InitialUpdate />} /> */}
+              <Route path="/" element={<StaffDashboard />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/user-dashboard" element={<UserDashboard />} />

@@ -16,6 +16,7 @@ import PhotoUpdate from "./PhotoUpdate";
 
 const InitialUpdate = () => {
   const [completedPercentage, setCompletedPercentage] = useState(70);
+  const [displaySelectedComponent, setDisplaySelectedComponent] = useState(1);
   return (
     <div className="initial-parking-lot-update-container">
       <div className="container-fluid">
@@ -79,7 +80,12 @@ const InitialUpdate = () => {
             <div className="action-item-holder">
               <ul>
                 <li>
-                  <div className="item row">
+                  <div
+                    className={`item row ${
+                      displaySelectedComponent === 1 ? "selected-item" : ""
+                    }`}
+                    onClick={() => setDisplaySelectedComponent(1)}
+                  >
                     <div className="col-sm-2">
                       <SlotIcon fontSize="large" color="primary" />
                     </div>
@@ -97,7 +103,12 @@ const InitialUpdate = () => {
                   </div>
                 </li>
                 <li>
-                  <div className="item row">
+                  <div
+                    className={`item row ${
+                      displaySelectedComponent === 2 ? "selected-item" : ""
+                    }`}
+                    onClick={() => setDisplaySelectedComponent(2)}
+                  >
                     <div className="col-sm-2">
                       <ParkingLotIcon fontSize="large" color="primary" />
                     </div>
@@ -115,7 +126,12 @@ const InitialUpdate = () => {
                   </div>
                 </li>
                 <li>
-                  <div className="item row">
+                  <div
+                    className={`item row ${
+                      displaySelectedComponent === 3 ? "selected-item" : ""
+                    }`}
+                    onClick={() => setDisplaySelectedComponent(3)}
+                  >
                     <div className="col-sm-2">
                       <ImageIcon fontSize="large" color="primary" />
                     </div>
@@ -131,7 +147,12 @@ const InitialUpdate = () => {
                   </div>
                 </li>
                 <li>
-                  <div className="item row">
+                  <div
+                    className={`item row ${
+                      displaySelectedComponent === 4 ? "selected-item" : ""
+                    }`}
+                    onClick={() => setDisplaySelectedComponent(4)}
+                  >
                     <div className="col-sm-2">
                       <PasswordIcon fontSize="large" color="primary" />
                     </div>
@@ -151,9 +172,13 @@ const InitialUpdate = () => {
             {/* TODO add note at last for first update stating must provide all values */}
           </div>
           <div className="col-md-7 right-container">
-            {/* <SlotInformationUpdate></SlotInformationUpdate> */}
-            {/* <ParkingLotInformationUpdate></ParkingLotInformationUpdate> */}
-            <PhotoUpdate></PhotoUpdate>
+            {displaySelectedComponent === 1 ? <SlotInformationUpdate /> : ""}
+            {displaySelectedComponent === 2 ? (
+              <ParkingLotInformationUpdate />
+            ) : (
+              ""
+            )}
+            {displaySelectedComponent === 3 ? <PhotoUpdate /> : ""}
           </div>
         </div>
       </div>

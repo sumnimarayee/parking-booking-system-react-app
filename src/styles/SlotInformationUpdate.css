@@ -25,12 +25,12 @@
   margin-bottom: 25px;
 }
 
-.slot-update-action-container .staff-update-button-holder {
+.staff-update-button-holder {
   position: absolute;
   bottom: 120px;
 }
 
-.slot-update-action-container .staff-update-button-holder button {
+.staff-update-button-holder button {
   width: 260px;
 }
 
