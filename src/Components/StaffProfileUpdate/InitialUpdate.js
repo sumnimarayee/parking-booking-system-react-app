@@ -1,22 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/InitialUpdate.css";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import SlotIcon from "@mui/icons-material/Place";
 import ParkingLotIcon from "@mui/icons-material/Business";
 import ImageIcon from "@mui/icons-material/Image";
 import PasswordIcon from "@mui/icons-material/Key";
 import ArrowIcon from "@mui/icons-material/ArrowForwardIos";
-import { width } from "@mui/system";
 import SlotInformationUpdate from "./SlotInformationUpdate";
 import ParkingLotInformationUpdate from "./ParkingLotInformationUpdate";
 import PhotoUpdate from "./PhotoUpdate";
+import PasswordUpdate from "./PasswordUpdate";
+import CircularProgressBar from "../Common/CircularProgressBar";
 
 // TODO: iMPLEMENT the context api to store the staff id and fetch id from there
 
 const InitialUpdate = () => {
-  const [completedPercentage, setCompletedPercentage] = useState(70);
   const [displaySelectedComponent, setDisplaySelectedComponent] = useState(1);
+  const [profileCompletedPercentage, setProfileCompletedPercentage] =
+    useState(0);
+
+  useEffect(() => {
+    if (localStorage.getItem("profileCompletedPercentage") !== null) {
+      setProfileCompletedPercentage(
+        Number(localStorage.getItem("profileCompletedPercentage"))
+      );
+    }
+  }, []);
   return (
     <div className="initial-parking-lot-update-container">
       <div className="container-fluid">
@@ -25,42 +34,32 @@ const InitialUpdate = () => {
             <h2>Update Information</h2>
 
             {/* card */}
-            <div className=" progress-card row">
-              <div
-                className="progress-circle-container col-md-5"
-                style={{
-                  width: 200,
-                  height: 200,
-                  display: "inline-block",
-                  marginTop: "10px",
-                }}
-              >
-                <CircularProgressbar
-                  value={completedPercentage}
-                  text={completedPercentage + "%"}
-                  styles={buildStyles({
-                    // Text size
-                    textSize: "20px",
-                    // How long animation takes to go from one percentage to another, in seconds
-                    pathTransitionDuration: 0.2,
-                    // Colors
-                    pathColor: "white",
-                    textColor: "white",
-                    //   trailColor: "red",
-                    //   backgroundColor: "#3e98c7",
-                  })}
-                />
-              </div>
-              <div className="progress-information col-md-8">
-                <div className="progress-heading">ParkingLot Information</div>
-                <div className="progress-body">
-                  Please provide information for all sections in order to
-                  complete the parking lot registration. Every section is to
-                  provided with data during initial update.
+            <div className=" progress-card">
+              <div className="progress-card-top">
+                <div
+                  className=""
+                  style={{
+                    width: 100,
+                    height: 100,
+                    // display: "inline-block",
+                    marginTop: "10px",
+                    flexShrink: "1",
+                  }}
+                >
+                  <CircularProgressBar
+                    completedPercentage={profileCompletedPercentage}
+                  />
+                </div>
+                <div className="progress-information">
+                  <div className="progress-heading">ParkingLot Information</div>
+                  <div className="progress-body">
+                    Please provide information for all sections in order to
+                    complete the parking lot registration.
+                  </div>
                 </div>
               </div>
 
-              <div className="row">
+              <div className="progress-card-bottom">
                 <button
                   type="button"
                   className="btn btn-light"
@@ -172,13 +171,34 @@ const InitialUpdate = () => {
             {/* TODO add note at last for first update stating must provide all values */}
           </div>
           <div className="col-md-7 right-container">
-            {displaySelectedComponent === 1 ? <SlotInformationUpdate /> : ""}
-            {displaySelectedComponent === 2 ? (
-              <ParkingLotInformationUpdate />
+            {displaySelectedComponent === 1 ? (
+              <SlotInformationUpdate
+                setProfileCompletedPercentage={setProfileCompletedPercentage}
+              />
             ) : (
               ""
             )}
-            {displaySelectedComponent === 3 ? <PhotoUpdate /> : ""}
+            {displaySelectedComponent === 2 ? (
+              <ParkingLotInformationUpdate
+                setProfileCompletedPercentage={setProfileCompletedPercentage}
+              />
+            ) : (
+              ""
+            )}
+            {displaySelectedComponent === 3 ? (
+              <PhotoUpdate
+                setProfileCompletedPercentage={setProfileCompletedPercentage}
+              />
+            ) : (
+              ""
+            )}
+            {displaySelectedComponent === 4 ? (
+              <PasswordUpdate
+                setProfileCompletedPercentage={setProfileCompletedPercentage}
+              />
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

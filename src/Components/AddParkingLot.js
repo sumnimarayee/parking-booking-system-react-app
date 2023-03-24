@@ -6,7 +6,7 @@ import ReactMapGL, {
   Popup,
 } from "react-map-gl";
 import Modal from "./Common/Modal";
-import axios from "axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { BASE_URL } from "../utils/Constants";
 import Geocoder from "./Common/Geocoder";
 
@@ -30,6 +30,8 @@ const AddParkingLot = () => {
     setLat(lat);
     setLng(lng);
   };
+
+  const axios = useAxiosPrivate();
 
   const addParkingLotValidation = () => {
     const errors = {};

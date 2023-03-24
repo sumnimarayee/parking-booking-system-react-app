@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { BASE_URL } from "../utils/Constants";
 import { Link, useNavigate } from "react-router-dom";
-import Modal from "../Components/Modals/SuccessModal";
+import Modal from "./Modals/Modal";
 import "../styles/Register.css";
 import {
   MDBContainer,
@@ -108,7 +108,6 @@ function Register() {
           title={modal.title}
           message={modal.message}
           type={modal.type}
-          abc="hello"
         />
       ) : (
         ""
@@ -200,9 +199,9 @@ function Register() {
                     </div>
                     <div className="form-group my-3">
                       <label htmlFor="Inputgender">Gender</label>
-                      <div class="form-check form-check-inline">
+                      <div className="form-check form-check-inline">
                         <input
-                          class="form-check-input"
+                          className="form-check-input"
                           type="radio"
                           name="inlineRadioOptions"
                           id="inlineRadio1"
@@ -215,13 +214,13 @@ function Register() {
                             });
                           }}
                         />
-                        <label class="form-check-label" for="inlineRadio1">
+                        <label className="form-check-label" for="inlineRadio1">
                           Female
                         </label>
                       </div>
-                      <div class="form-check form-check-inline">
+                      <div className="form-check form-check-inline">
                         <input
-                          class="form-check-input"
+                          className="form-check-input"
                           type="radio"
                           name="inlineRadioOptions"
                           id="inlineRadio2"
@@ -234,7 +233,7 @@ function Register() {
                             });
                           }}
                         />
-                        <label class="form-check-label" for="inlineRadio2">
+                        <label className="form-check-label" for="inlineRadio2">
                           Male
                         </label>
                       </div>
@@ -244,7 +243,7 @@ function Register() {
                     </div>
                     <div>
                       <select
-                        class="form-select"
+                        className="form-select"
                         aria-label="Select Vehicle Type"
                         value={formValues.vehicleType}
                         onChange={(e) => {

@@ -1,39 +1,40 @@
-.parking-update-action-container {
-  height: 100%;
-
-  /* position: absolute; */
-}
 .parking-update-action-container .parking-update-topic {
-  padding-bottom: 50px;
+  padding-bottom: 10px;
   border-bottom: 1px solid lightblue;
 }
 
 .parking-update-action-container .parking-update-body {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .parking-update-action-container form {
-  margin-top: 30px;
-  font-size: 22px;
+  margin-top: 10px;
+  font-size: 1rem;
 }
 
 .parking-update-action-container form input {
   height: 50px;
   font: 16px;
-  width: 80%;
-  display: block;
-  margin-bottom: 25px;
+  width: 100%;
 }
 
-.parking-update-action-container .staff-update-button-holder {
-  position: absolute;
-  bottom: 120px;
+.parking-update-action-container .form-group {
+  margin-bottom: 20px;
 }
 
 .parking-update-action-container .staff-update-button-holder button {
-  width: 260px;
+  width: 200px;
 }
 
 .parking-update-action-container form label {
   margin-bottom: 5px;
+}
+
+.staff-update-button-holder {
+  display: flex;
+  justify-content: space-between;
+}
+
+.staff-update-button-holder button {
+  width: 180px;
 }

@@ -1,0 +1,15 @@
+.navigation-bar {
+  background-color: #222;
+  padding: 10px 15px;
+  /* height: 50px; */
+  display: flex;
+  align-items: center;
+  color: white;
+  /* justify-content: space-around; */
+}
+
+.navigation-bar .software-name {
+  margin-left: 2rem;
+  font-weight: 400;
+  font-size: 1.2rem;
+}

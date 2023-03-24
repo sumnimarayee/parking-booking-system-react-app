@@ -1,63 +1,178 @@
-import axios from "axios";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useAxiosprivate from "../../hooks/useAxiosPrivate";
 import "../../styles/ParkingLotInformationUpdate.css";
-import { BASE_URL } from "../../utils/Constants";
+import Loader from "../Common/Loader";
+import Modal from "../Modals/Modal";
+import { computeStaffProfileUpdatePercentage } from "../../utils/utility";
 
-const ParkingLotInformationUpdate = () => {
-  const [formValues, setFormValues] = useState({});
+const ParkingLotInformationUpdate = ({ setProfileCompletedPercentage }) => {
+  const [formValues, setFormValues] = useState({
+    parkingLotName: "",
+    parkingLotLocation: "",
+    openingTime: "",
+    closingTime: "",
+  });
   const [formErrors, setFormErrors] = useState({});
+  const [loader, setLoader] = useState(false);
+  const [modal, setModal] = useState({});
+
+  const axios = useAxiosprivate();
+
+  useEffect(() => {
+    setLoader(true);
+    const fetchParkingLot = async () => {
+      const response = await axios.get(
+        `parking-lot/${localStorage.getItem("parkingLotId")}`
+      );
+      setLoader(false);
+      const parkingLot = response.data.data;
+      const setData = {
+        parkingLotName: parkingLot.name,
+        parkingLotLocation: parkingLot.location,
+        openingTime: parkingLot.openingTime,
+        closingTime: parkingLot.closingTime,
+      };
+      setFormValues({ ...formValues, ...setData });
+    };
+    fetchParkingLot();
+  }, []);
 
   const validate = () => {
     const errors = {};
 
-    const onlyNumberRegex = /^[0-9]*$/;
+    const validTimeRegex = /^(?:[01]\d|2[0-3]):[0-5]\d$/;
 
-    if (formValues.bikeParkingCapacity) {
-      //check must be number only
-      if (onlyNumberRegex.test(formValues.bikeParkingCapacity) === false) {
-        errors.bikeParkingCapacity = "please provide number only";
+    if (formValues.parkingLotName) {
+      if (formValues.parkingLotName.length > 40) {
+        errors.parkingLotName = "please provide name less than 40 characters";
       }
     }
-    if (formValues.carParkingCapacity) {
-      //check must be number only
-      if (onlyNumberRegex.test(formValues.carParkingCapacity) === false) {
-        errors.carParkingCapacity = "please provide number only";
+    if (formValues.parkingLotLocation) {
+      if (formValues.parkingLotLocation.length > 40) {
+        errors.carParkingCapacity =
+          "please provide location less than 40 characters";
       }
     }
-    if (formValues.bikeParkingCostPerHour) {
-      //check must be number only
-      if (onlyNumberRegex.test(formValues.bikeParkingCostPerHour) === false) {
-        errors.bikeParkingCostPerHour = "please provide number only";
+    if (formValues.openingTime) {
+      //check must be between 0 and 23
+      if (validTimeRegex.test(formValues.openingTime) === false) {
+        errors.openingTime = "please provide time from 00:00 to 23:59 only";
       }
     }
-    if (formValues.carParkingCostPerHour) {
-      //check must be number only
-      if (onlyNumberRegex.test(formValues.carParkingCostPerHour) === false) {
-        errors.carParkingCostPerHour = "please provide number only";
+    if (formValues.closingTime) {
+      //check must be between 0 and 23
+      if (validTimeRegex.test(formValues.closingTime) === false) {
+        errors.closingTime = "please provide time from 00:00 to 23:59 only";
       }
     }
+    if (!errors.closingTime && !errors.openingTime)
+      if (formValues.openingTime && formValues.closingTime) {
+        //check opening time must be less than closing time
+        const openingTime = formValues.openingTime;
+        const closingTime = formValues.closingTime;
 
-    setFormErrors(errors);
+        const openingTimeParts = openingTime.split(":");
+        const closingTimeParts = closingTime.split(":");
+        const openingHours = parseInt(openingTimeParts[0]);
+        const openingMinutes = parseInt(openingTimeParts[1]);
+        const closingHours = parseInt(closingTimeParts[0]);
+        const closingMinutes = parseInt(closingTimeParts[1]);
+
+        if (openingHours < closingHours) {
+        } else if (
+          openingHours === closingHours &&
+          openingMinutes < closingMinutes
+        ) {
+        } else {
+          errors.openingTime = "opening time must be less than closing time";
+          errors.closingTime = "closing time must be more than opening time";
+        }
+      }
+    setFormErrors({ ...errors });
+    return errors;
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    validate();
-    if (Object.keys(formErrors) === 0) {
+  const handleReset = async () => {
+    setLoader(true);
+    const response = await axios.get(
+      `parking-lot/${localStorage.getItem("parkingLotId")}`
+    );
+    setLoader(false);
+    const parkingLot = response.data.data;
+    const setData = {
+      parkingLotName: parkingLot.name,
+      parkingLotLocation: parkingLot.location,
+      openingTime: parkingLot.openingTime,
+      closingTime: parkingLot.closingTime,
+    };
+    setFormValues({ ...formValues, ...setData });
+  };
+
+  const onSubmitForm = (e) => {
+    const errors = validate();
+    if (Object.keys(errors).length === 0) {
+      setLoader(true);
+      const payload = {};
+      if (formValues.parkingLotName) {
+        payload.name = formValues.parkingLotName;
+      }
+
+      if (formValues.parkingLotLocation) {
+        payload.location = formValues.parkingLotLocation;
+      }
+
+      if (formValues.openingTime) {
+        payload.openingTime = formValues.openingTime;
+      }
+      if (formValues.closingTime) {
+        payload.closingTime = formValues.closingTime;
+      }
       // API call to update the parking lot
-      axios.patch(BASE_URL + `/parking-lot/`);
+      axios
+        .patch(`/parking-lot/${localStorage.getItem("parkingLotId")}`, payload)
+        .then((res) => {
+          setLoader(false);
+          const percent = computeStaffProfileUpdatePercentage(
+            res.data.data.updatedItems
+          );
+          localStorage.setItem("profileCompletedPercentage", percent);
+          setProfileCompletedPercentage(percent);
+          setModal({
+            show: true,
+            title: "Profile Updated",
+            message: "Parkinglot has been updated successfully",
+            type: "success",
+            hideAfterSeconds: 3,
+          });
+        })
+        .catch((error) => {
+          setLoader(false);
+          //modal
+        });
     }
   };
   return (
     <div className="parking-update-action-container">
+      {loader ? <Loader /> : ""}
+      {modal.show ? (
+        <Modal
+          modal={setModal}
+          title={modal.title}
+          message={modal.message}
+          type={modal.type}
+          hideAfterSeconds={modal.hideAfterSeconds}
+        />
+      ) : (
+        ""
+      )}
       <div className="parking-update-topic">
         <h2>Parking Information</h2>
       </div>
 
-      <div className="parking-update-body col-sm-8">
+      <div className="parking-update-body col-sm-10">
         <h3>Enter Parking Details</h3>
-        <form onSubmit={onSubmit}>
+        <form>
           <div className="form-group">
             <label htmlFor="Name">Parking Lot Name</label>
             <input
@@ -114,7 +229,7 @@ const ParkingLotInformationUpdate = () => {
             <div className="form-error-message  ">{formErrors.openingTime}</div>
           </div>
           <div className="form-group">
-            <label htmlFor="ClosingTime">ParkingLot Opening Time</label>
+            <label htmlFor="ClosingTime">ParkingLot Closing Time</label>
             <input
               type="text"
               id="ClosingTime"
@@ -132,18 +247,20 @@ const ParkingLotInformationUpdate = () => {
           </div>
         </form>
       </div>
-      <div className="staff-update-button-holder col-sm-4">
+      <div className="staff-update-button-holder">
         <button
           type="button"
-          class="btn btn-primary btn-lg"
-          style={{ float: "right" }}
+          className="btn btn-primary btn-lg"
+          onClick={() => {
+            onSubmitForm();
+          }}
         >
           Update
         </button>
         <button
           type="button"
-          class="btn btn-danger btn-lg"
-          style={{ float: "left" }}
+          className="btn btn-danger btn-lg"
+          onClick={() => handleReset()}
         >
           Discard
         </button>

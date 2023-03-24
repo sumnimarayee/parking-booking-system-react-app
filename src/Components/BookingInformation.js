@@ -1,17 +1,18 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/Constants";
+import useAxiosprivate from "../hooks/useAxiosPrivate";
 
 const BookingInformation = () => {
   const { state } = useLocation();
   const { parkingLotId } = state;
   const [parkingLot, setParkingLot] = useState({});
   const navigate = useNavigate();
+  const axios = useAxiosprivate();
 
   useEffect(() => {
     async function fetch() {
-      const data = await axios.get(`${BASE_URL}/parking-lot/${parkingLotId}`);
+      const data = await axios.get(`/parking-lot/${parkingLotId}`, {});
       setParkingLot(data.data.data);
     }
     fetch();
@@ -45,7 +46,7 @@ const BookingInformation = () => {
       </p>
       <button
         type="button"
-        class="btn btn-outline-info"
+        className="btn btn-outline-info"
         onClick={() => {
           navigate("/test", {
             state: { vehicleType: "fourWheeler", parkingLotId: parkingLot._id },
@@ -56,7 +57,7 @@ const BookingInformation = () => {
       </button>
       <button
         type="button"
-        class="btn btn-outline-info"
+        className="btn btn-outline-info"
         onClick={() => {
           navigate("/time-selection", {
             state: { vehicleType: "twoWheeler", parkingLotId: parkingLot._id },

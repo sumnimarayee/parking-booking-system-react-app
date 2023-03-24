@@ -1,37 +1,33 @@
-.slot-update-action-container {
-  height: 100%;
-
-  /* position: absolute; */
-}
 .slot-update-action-container .slot-update-topic {
-  padding-bottom: 50px;
+  padding-bottom: 10px;
   border-bottom: 1px solid lightblue;
 }
 
 .slot-update-action-container .slot-update-body {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .slot-update-action-container form {
-  margin-top: 30px;
-  font-size: 22px;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+.slot-update-action-container .form-group {
+  margin-bottom: 20px;
 }
 
 .slot-update-action-container form input {
-  height: 50px;
   font: 16px;
-  width: 80%;
-  display: block;
-  margin-bottom: 25px;
+  width: 100%;
 }
 
-.staff-update-button-holder {
-  position: absolute;
-  bottom: 120px;
+.slot-update-button-holder {
+  display: flex;
+  justify-content: space-between;
 }
 
-.staff-update-button-holder button {
-  width: 260px;
+.slot-update-button-holder button {
+  width: 180px;
 }
 
 .slot-update-action-container form label {

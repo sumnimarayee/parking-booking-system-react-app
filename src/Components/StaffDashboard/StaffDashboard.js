@@ -1,23 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { Table, Button } from "react-bootstrap";
 import "./StaffDashboard.css";
 import InfoIcon from "@mui/icons-material/Info";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { CSVLink } from "react-csv";
+import useAxiosprivate from "../../hooks/useAxiosPrivate";
+import useAuth from "../../hooks/useAuth";
+import { computeStaffProfileUpdatePercentage } from "../../utils/utility";
+import CircularProgressBar from "../Common/CircularProgressBar";
+import { useNavigate } from "react-router-dom";
 
 function StaffDashboard() {
-  const [tableData, setTableData] = useState([
-    { id: 1, name: "John Doe", email: "john.doe@example.com" },
-    { id: 2, name: "Jane Doe", email: "jane.doe@example.com" },
-    {
-      id: 3,
-      name: "Bob Smith",
-      email: "bob.smith@example.com",
-    },
-  ]);
+  const [tableData, setTableData] = useState([]);
+  const [profileCompletedPercentage, setProfileCompletedPercentage] =
+    useState(0);
+
+  const axios = useAxiosprivate();
+  const navigate = useNavigate();
+  const { auth } = useAuth();
+  useEffect(() => {
+    const fetchParkingLot = async () => {
+      const response = await axios.get(`parking-lot/staff/${auth.id}`);
+      // setTableData(response.data.data.parkingLot)
+      setTableData(response.data.data.bookings);
+      const computedPercentage = computeStaffProfileUpdatePercentage(
+        response.data.data.parkingLot.updatedItems
+      );
+      localStorage.setItem("profileCompletedPercentage", computedPercentage);
+      setProfileCompletedPercentage(computedPercentage);
+      // console.log();
+      localStorage.setItem("parkingLotId", response.data.data.parkingLot._id);
+    };
+    fetchParkingLot();
+  }, []);
 
   const csvReport = {
-    data: tableData,
+    data: tableData.length > 0 ? tableData : [{ null: null }],
     filename: "test.csv",
   };
 
@@ -44,7 +62,7 @@ function StaffDashboard() {
         <div className="grid-item-1">
           <input
             type="search"
-            class="form-control rounded"
+            className="form-control rounded"
             placeholder="Enter Vehicle Plate Number"
             aria-label="Search"
             aria-describedby="search-addon"
@@ -63,29 +81,70 @@ function StaffDashboard() {
           <RefreshIcon />
         </div> */}
       </div>
-
-      <table className="table table-striped table-bordered table-hover">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tableData.map((data) => (
-            <tr key={data.id}>
-              <td>{data.id}</td>
-              <td>{data.name}</td>
-              <td>{data.email}</td>
-              <td>
-                <button className="btn btn-primary">View Details</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {profileCompletedPercentage === 100 ? (
+        tableData.length > 0 ? (
+          <table className="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tableData.map((data) => (
+                <tr key={data.id}>
+                  <td>{data.id}</td>
+                  <td>{data.name}</td>
+                  <td>{data.email}</td>
+                  <td>
+                    <button className="btn btn-primary">View Details</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className="no-booking-text">
+            <div>No Bookings For Today</div>
+          </div>
+        )
+      ) : (
+        <div className="complete-profile-update-card">
+          <div className="card">
+            <div className="card-top">
+              <div
+                style={{
+                  width: "5.5rem",
+                  height: "5.5rem",
+                  display: "inline-block",
+                  marginTop: "10px",
+                }}
+              >
+                <CircularProgressBar
+                  completedPercentage={profileCompletedPercentage}
+                />
+              </div>
+              <div className="complete-update-description">
+                <div>
+                  Update the profile for all section from the "update profile"
+                  <br />
+                  section by clicking on the button below.
+                </div>
+              </div>
+            </div>
+            <div className="card-bottom">
+              <button
+                className="btn btn-primary"
+                onClick={() => navigate("/initial-update")}
+              >
+                update profile
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

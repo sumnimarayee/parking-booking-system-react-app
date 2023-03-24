@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsFillTrashFill } from "react-icons/bs";
-import axios from "axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { BASE_URL } from "../utils/Constants";
 
 const SuperAdminDashboard = () => {
@@ -14,6 +14,8 @@ const SuperAdminDashboard = () => {
   };
 
   let navigate = useNavigate();
+  const axios = useAxiosPrivate();
+
   const routeChange = () => {
     let path = "/add-parkinglot";
     navigate(path);
@@ -21,7 +23,7 @@ const SuperAdminDashboard = () => {
 
   useEffect(() => {
     async function fetch() {
-      const fetchedData = await axios.get(`${BASE_URL}/parking-lot`);
+      const fetchedData = await axios.get(`/parking-lot`);
       setData(fetchedData.data.data);
     }
     fetch();
