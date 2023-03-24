@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { BASE_URL } from "../utils/Constants";
-import axios from "axios";
+import useAxiosprivate from "../hooks/useAxiosPrivate";
 
 const Esewa = () => {
   const { state } = useLocation();
@@ -10,10 +10,11 @@ const Esewa = () => {
     state;
   const [pinNo, setPinNo] = useState("");
   const [parkingLot, setParkingLot] = useState({});
+
+  const axios = useAxiosprivate();
   useEffect(() => {
     async function fetch() {
-      const data = await axios.get(`${BASE_URL}/parking-lot/${parkingLotId}`);
-      // console.log(data);
+      const data = await axios.get(`/parking-lot/${parkingLotId}`);
       setParkingLot(data.data.data);
     }
     fetch();
@@ -40,13 +41,8 @@ const Esewa = () => {
       bookedTime: `${startTime}-${endTime}`,
       pinNo,
     };
-    console.log(bookingPayload);
     axios
-      .post(`${BASE_URL}/booking`, bookingPayload, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-        },
-      })
+      .post(`/booking`, bookingPayload)
       .then((data) => {
         console.log(data);
       })

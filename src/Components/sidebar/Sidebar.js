@@ -1,18 +1,31 @@
 import React from "react";
 import "../../styles/Sidebar.css";
-import { userSidebar } from "./SidebarData";
+import { userSidebar, staffSidebar, superAdminSidebar } from "./SidebarData";
+import useAuth from "../../hooks/useAuth";
+import useLogout from "../../hooks/useLogout";
 
-const Sidebar = () => {
+const Sidebar = ({ displaySidebar }) => {
+  const { auth } = useAuth();
+  const sideBar = auth.role.isBookingUser
+    ? userSidebar
+    : auth.role.isStaff
+    ? staffSidebar
+    : auth.role.isSuperAdmin
+    ? superAdminSidebar
+    : null;
+  const logout = useLogout();
   return (
-    <div className="Sidebar">
+    <div className={`Sidebar ${displaySidebar ? "Sidebar-display" : ""}`}>
       <ul className="SidebarList">
-        {userSidebar.map((val, key) => {
+        {sideBar.map((val, key) => {
           return (
             <li
               key={key}
               className="SidebarRow"
-              onClick={() => {
-                window.location.pathname = val.link;
+              onClick={async () => {
+                val.title === "Logout" ? await logout() : console.log("");
+                console.log("logout found");
+                // window.location.pathname = val.link;
               }}
               id={window.location.pathname == val.link ? "active" : ""}
             >

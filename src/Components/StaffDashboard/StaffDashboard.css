@@ -57,3 +57,43 @@
 .staff-dashboard-container .button-1 {
   margin-right: 20px;
 }
+
+.staff-dashboard-container .no-booking-text {
+  font-weight: 500;
+  font-size: 2.6rem;
+  color: #333;
+  display: flex;
+  justify-content: center;
+}
+
+.staff-dashboard-container .complete-profile-update-card {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  /* width: 40%; */
+}
+
+.card-top {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: center;
+}
+
+.complete-update-description {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  color: #333;
+  height: 100%;
+  margin-left: 20px;
+  font-weight: 500;
+}

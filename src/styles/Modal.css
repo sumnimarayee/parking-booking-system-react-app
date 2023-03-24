@@ -1,22 +1,29 @@
 .modalBackground {
-  width: 100vw;
+  margin: 0;
+  padding: 0;
+  width: 102vw;
   height: 100vh;
-  background-color: rgb(211, 203, 203);
+  background-color: rgb(52, 42, 42);
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  opacity: 0.8;
+  opacity: 0.9;
+  left: -10px;
+  top: 0;
 }
 
 .modalContainer {
-  width: 300px;
+  width: 25%;
   height: auto;
   border-radius: 12px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  padding: 2px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .modalContainer .title {
@@ -27,9 +34,7 @@
 }
 
 .titleCloseBtn {
-  display: flex;
-  justify-content: flex-end;
-  /* height: 0px; */
+  align-self: flex-end;
 }
 
 .titleCloseBtn button {
@@ -39,6 +44,7 @@
   font-weight: bold;
   cursor: pointer;
   color: red;
+  align-self: flex-end;
 }
 
 .modalContainer .body {
@@ -50,22 +56,28 @@
   text-align: center;
 }
 
+.modalContainer .body .message-body {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
 .modalContainer .footer {
-  flex: 20%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* flex: 20%; */
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  margin-top: 15px;
 }
 
 .modalContainer .footer button {
-  width: 150px;
-  height: 45px;
+  width: 120px;
+  /* height: 45px;
   margin: 10px;
   border: none;
   background-color: cornflowerblue;
   color: white;
   border-radius: 8px;
-  font-size: 20px;
+  font-size: 20px; */
   cursor: pointer;
 }
 
@@ -73,7 +85,8 @@
   background-color: crimson;
 }
 
-.body .success-gif img {
+.success-gif img {
   object-fit: contain;
   height: 150px;
+  width: 150px;
 }

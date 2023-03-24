@@ -1,8 +1,7 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import TimePicker from "react-time-picker";
-import { BASE_URL } from "../utils/Constants";
+import useAxiosprivate from "../hooks/useAxiosPrivate";
 
 const TimeSelection = () => {
   const [startTime, setStartTime] = useState("");
@@ -13,10 +12,11 @@ const TimeSelection = () => {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const [vehiclePlateNo, setVehiclePlateNo] = useState("");
+  const axios = useAxiosprivate();
 
   useEffect(() => {
     async function fetch() {
-      const data = await axios.get(`${BASE_URL}/parking-lot/${parkingLotId}`);
+      const data = await axios.get(`parking-lot/${parkingLotId}`);
       setParkingLot(data.data.data);
     }
     fetch();
@@ -96,7 +96,7 @@ const TimeSelection = () => {
       <input
         type="text"
         value={vehiclePlateNo}
-        onchange={(e) => setVehiclePlateNo(e.target.value)}
+        onChange={(e) => setVehiclePlateNo(e.target.value)}
       />
       {/* add a continue button which when clicked performs a validation and after validation is success call esewa payment page. */}
       <button onClick={() => validateTimeSelection()}>continue</button>

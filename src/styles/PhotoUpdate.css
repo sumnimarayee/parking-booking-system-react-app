@@ -22,18 +22,18 @@
   margin-right: 30px;
   border-radius: 10px;
   margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .upload-parking-lot-images-container .photo-container .photo-holder {
   height: 250px;
-  width: 333px;
+  width: 300px;
   border-radius: 10px;
-  display: inline-block;
-  margin: 10px 20px;
-}
-
-.upload-parking-lot-images-container .photo-container img {
-  object-fit: fill;
+  border: 1px dotted lightblue;
+  flex-direction: row;
+  margin: 10px 10px;
 }
 
 .delete-photo-icon {
@@ -49,4 +49,14 @@
 
 .photo-holder:hover .hide {
   display: block;
+}
+
+.photo-update-button-holder {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.photo-update-button-holder button {
+  width: 180px;
+  margin: 10px 10px;
 }

@@ -1,12 +1,42 @@
-import axios from "axios";
 import React from "react";
-import { useState } from "react";
+import useAxiosprivate from "../../hooks/useAxiosPrivate";
+import { useState, useEffect } from "react";
 import "../../styles/SlotInformationUpdate.css";
-import { BASE_URL } from "../../utils/Constants";
+import { computeStaffProfileUpdatePercentage } from "../../utils/utility";
+import Loader from "../Common/Loader";
+import Modal from "../Modals/Modal";
 
-const SlotInformationUpdate = () => {
-  const [formValues, setFormValues] = useState({});
+const SlotInformationUpdate = ({ setProfileCompletedPercentage }) => {
+  const [formValues, setFormValues] = useState({
+    bikeParkingCapacity: "",
+    carParkingCapacity: "",
+    bikeParkingCostPerHour: "",
+    carParkingCostPerHour: "",
+  });
   const [formErrors, setFormErrors] = useState({});
+  const [loader, setLoader] = useState(false);
+  const [modal, setModal] = useState({});
+
+  const axios = useAxiosprivate();
+
+  useEffect(() => {
+    setLoader(true);
+    const fetchParkingLot = async () => {
+      const response = await axios.get(
+        `parking-lot/${localStorage.getItem("parkingLotId")}`
+      );
+      setLoader(false);
+      const parkingLot = response.data.data;
+      const setData = {
+        bikeParkingCapacity: parkingLot.bikeParkingCapacity,
+        carParkingCapacity: parkingLot.carParkingCapacity,
+        bikeParkingCostPerHour: parkingLot.bikeParkingCostPerHour,
+        carParkingCostPerHour: parkingLot.carParkingCostPerHour,
+      };
+      setFormValues({ ...formValues, ...setData });
+    };
+    fetchParkingLot();
+  }, []);
 
   const validate = () => {
     const errors = {};
@@ -39,25 +69,89 @@ const SlotInformationUpdate = () => {
     }
 
     setFormErrors(errors);
+    return errors;
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    validate();
-    if (Object.keys(formErrors) === 0) {
+  const handleReset = async () => {
+    setLoader(true);
+    const response = await axios.get(
+      `parking-lot/${localStorage.getItem("parkingLotId")}`
+    );
+    setLoader(false);
+    const parkingLot = response.data.data;
+    const setData = {
+      bikeParkingCapacity: parkingLot.bikeParkingCapacity,
+      carParkingCapacity: parkingLot.carParkingCapacity,
+      bikeParkingCostPerHour: parkingLot.bikeParkingCostPerHour,
+      carParkingCostPerHour: parkingLot.carParkingCostPerHour,
+    };
+    setFormValues({ ...formValues, ...setData });
+  };
+
+  const onSubmitForm = (e) => {
+    const errors = validate();
+    if (Object.keys(errors).length === 0) {
+      setLoader(true);
+      const payload = {};
+      if (formValues.bikeParkingCapacity) {
+        payload.bikeParkingCapacity = formValues.bikeParkingCapacity;
+      }
+
+      if (formValues.carParkingCapacity) {
+        payload.carParkingCapacity = formValues.carParkingCapacity;
+      }
+
+      if (formValues.bikeParkingCostPerHour) {
+        payload.bikeParkingCostPerHour = formValues.bikeParkingCostPerHour;
+      }
+      if (formValues.carParkingCostPerHour) {
+        payload.carParkingCostPerHour = formValues.carParkingCostPerHour;
+      }
       // API call to update the parking lot
-      axios.patch(BASE_URL + `/parking-lot/`);
+      axios
+        .patch(`/parking-lot/${localStorage.getItem("parkingLotId")}`, payload)
+        .then((res) => {
+          setLoader(false);
+          const percent = computeStaffProfileUpdatePercentage(
+            res.data.data.updatedItems
+          );
+          localStorage.setItem("profileCompletedPercentage", percent);
+          setProfileCompletedPercentage(percent);
+          setModal({
+            show: true,
+            title: "Profile Updated",
+            message: "Parkinglot data has been updated successfully",
+            type: "success",
+            hideAfterSeconds: 3,
+          });
+        })
+        .catch((error) => {
+          setLoader(false);
+          //modal
+        });
     }
   };
   return (
     <div className="slot-update-action-container">
+      {loader ? <Loader /> : ""}
+      {modal.show ? (
+        <Modal
+          modal={setModal}
+          title={modal.title}
+          message={modal.message}
+          type={modal.type}
+          hideAfterSeconds={modal.hideAfterSeconds}
+        />
+      ) : (
+        ""
+      )}
       <div className="slot-update-topic">
         <h2>Slot Information</h2>
       </div>
 
-      <div className="slot-update-body col-sm-8">
+      <div className="slot-update-body col-sm-10">
         <h3>Enter Slot Details</h3>
-        <form onSubmit={onSubmit}>
+        <form>
           <div className="form-group">
             <label htmlFor="InputBikeCostPerHour">
               Bike Parking Cost Per Hour
@@ -75,7 +169,7 @@ const SlotInformationUpdate = () => {
               }
               placeholder="Enter bike parking cost per hour"
             />
-            <div className="form-error-message  ">
+            <div className="form-error-message">
               {formErrors.bikeParkingCostPerHour}
             </div>
           </div>
@@ -96,12 +190,12 @@ const SlotInformationUpdate = () => {
               }
               placeholder="Enter car parking cost per hour"
             />
-            <div className="form-error-message  ">
+            <div className="form-error-message">
               {formErrors.carParkingCostPerHour}
             </div>
           </div>
           <div className="form-group">
-            <label htmlFor="BikeParkingCapacity">Car Parking Capacity</label>
+            <label htmlFor="BikeParkingCapacity">Bike Parking Capacity</label>
             <input
               type="text"
               id="BikeParkingCapacity"
@@ -115,7 +209,7 @@ const SlotInformationUpdate = () => {
               }
               placeholder="Enter bike parking capacity"
             />
-            <div className="form-error-message  ">
+            <div className="form-error-message">
               {formErrors.bikeParkingCapacity}
             </div>
           </div>
@@ -134,24 +228,28 @@ const SlotInformationUpdate = () => {
               }
               placeholder="Enter car parking capacity"
             />
-            <div className="form-error-message  ">
+            <div className="form-error-message">
               {formErrors.carParkingCapacity}
             </div>
           </div>
         </form>
       </div>
-      <div className="staff-update-button-holder col-sm-4">
+      <div className="slot-update-button-holder">
         <button
           type="button"
-          class="btn btn-primary btn-lg"
-          style={{ float: "right" }}
+          className="btn btn-primary btn-lg"
+          onClick={() => {
+            onSubmitForm();
+          }}
         >
           Update
         </button>
         <button
           type="button"
-          class="btn btn-danger btn-lg"
-          style={{ float: "left" }}
+          className="btn btn-danger btn-lg"
+          onClick={() => {
+            handleReset();
+          }}
         >
           Discard
         </button>

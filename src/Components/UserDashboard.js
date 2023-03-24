@@ -8,8 +8,7 @@ import ReactMapGL, {
 } from "react-map-gl";
 import Geocoder from "./Common/Geocoder";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { BASE_URL } from "../utils/Constants";
-import axios from "axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import Loader from "./Common/Loader";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import "../styles/UserDashboard.css";
@@ -31,6 +30,8 @@ export default function UserDashboard() {
     setLat(lat);
     setLng(lng);
   };
+
+  const axios = useAxiosPrivate();
 
   const onClickPriceFilter = async (e) => {
     e.preventDefault();
@@ -73,7 +74,7 @@ export default function UserDashboard() {
       queryParam += `&maxPrice=${priceFilterValues.maxPrice}`;
     }
     if (priceFilterValues.minPrice || priceFilterValues.maxPrice) {
-      const response = await axios.get(`${BASE_URL}/parking-lot${queryParam}`);
+      const response = await axios.get(`/parking-lot${queryParam}`);
       setParkingLots(response.data.data);
     }
   };
@@ -81,7 +82,8 @@ export default function UserDashboard() {
   useEffect(() => {
     setLoader(true);
     async function fetchData() {
-      const response = await axios.get(`${BASE_URL}/parking-lot`);
+      // const headers = {'Authorization': 'Bearer ' + localStorage.getItem('access_token')};
+      const response = await axios.get(`/parking-lot`);
       setParkingLots(response.data.data);
       setLoader(false);
     }
@@ -125,7 +127,7 @@ export default function UserDashboard() {
           </div>
           <div>
             <select
-              class="form-select"
+              className="form-select"
               aria-label="Select Vehicle Type"
               value={priceFilterValues.vehicleType}
               onChange={(e) => {

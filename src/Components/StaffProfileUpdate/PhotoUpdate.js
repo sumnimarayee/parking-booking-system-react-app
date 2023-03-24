@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { storage } from "../../utils/Firebase";
@@ -7,6 +7,10 @@ import { v4 } from "uuid";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "../../styles/PhotoUpdate.css";
+import useAxiosprivate from "../../hooks/useAxiosPrivate";
+import Loader from "../Common/Loader";
+import Modal from "../Modals/Modal";
+import { computeStaffProfileUpdatePercentage } from "../../utils/utility";
 
 //TODO: when components loads call the fetch parkinglot by id api and
 // save the image urls in the images state then continue
@@ -43,13 +47,34 @@ const rejectStyle = {
   borderColor: "#ff1744",
 };
 
-function PhotoUpdate(props) {
+function PhotoUpdate({ setProfileCompletedPercentage }) {
   const [images, setImages] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const [modal, setModal] = useState({});
+
+  const axios = useAxiosprivate();
+
+  useEffect(() => {
+    setLoader(true);
+    const fetchParkingLot = async () => {
+      const response = await axios.get(
+        `parking-lot/${localStorage.getItem("parkingLotId")}`
+      );
+      setLoader(false);
+      const parkingLot = response.data.data;
+      const setData = parkingLot.imageURLs;
+      setImages(setData);
+    };
+    fetchParkingLot();
+  }, []);
+
   const uploadToFirebase = (image) => {
+    setLoader(true);
     console.log("upload to firebase called");
     const imageRef = ref(storage, v4());
     uploadBytes(imageRef, image)
       .then((snapshot) => {
+        setLoader(false);
         getDownloadURL(snapshot.ref).then((downloadURL) => {
           setImages((previousImages) => {
             return [...previousImages, downloadURL];
@@ -57,6 +82,7 @@ function PhotoUpdate(props) {
         });
       })
       .catch((error) => {
+        setLoader(false);
         //display a modal stating error uploading a image
       });
   };
@@ -67,6 +93,46 @@ function PhotoUpdate(props) {
     allImageUrls.splice(imageIndexToDelete, 1);
     setImages(allImageUrls);
   };
+
+  const onSubmitForm = (e) => {
+    setLoader(true);
+    const payload = {};
+    payload.imageURLs = images;
+    // API call to update the parking lot
+    axios
+      .patch(`/parking-lot/${localStorage.getItem("parkingLotId")}`, payload)
+      .then((res) => {
+        setLoader(false);
+        const percent = computeStaffProfileUpdatePercentage(
+          res.data.data.updatedItems
+        );
+        localStorage.setItem("profileCompletedPercentage", percent);
+        setProfileCompletedPercentage(percent);
+        setModal({
+          show: true,
+          title: "Photo Updated",
+          message: "Your photos has been updated successfully",
+          type: "success",
+          hideAfterSeconds: 3,
+        });
+      })
+      .catch((error) => {
+        setLoader(false);
+        //modal
+      });
+  };
+
+  const resetPhotoUpdate = async () => {
+    const response = await axios.get(
+      `parking-lot/${localStorage.getItem("parkingLotId")}`
+    );
+
+    const parkingLot = response.data.data;
+    const setData = parkingLot.imageURLs;
+    setImages(setData);
+    setLoader(false);
+  };
+
   const {
     getRootProps,
     getInputProps,
@@ -107,6 +173,18 @@ function PhotoUpdate(props) {
 
   return (
     <div className="upload-parking-lot-images-container">
+      {loader ? <Loader /> : ""}
+      {modal.show ? (
+        <Modal
+          modal={setModal}
+          title={modal.title}
+          message={modal.message}
+          type={modal.type}
+          hideAfterSeconds={modal.hideAfterSeconds}
+        />
+      ) : (
+        ""
+      )}
       <div className="file-dropzone-container">
         <div className="dropzone-holder">
           <div {...getRootProps({ style })}>
@@ -146,18 +224,20 @@ function PhotoUpdate(props) {
         <div></div>
       )}
 
-      <div className="staff-update-button-holder col-sm-3">
+      <div className="photo-update-button-holder">
         <button
           type="button"
-          class="btn btn-primary btn-lg"
-          style={{ float: "right" }}
+          className="btn btn-primary btn-lg"
+          onClick={() => {
+            onSubmitForm();
+          }}
         >
           Update
         </button>
         <button
           type="button"
-          class="btn btn-danger btn-lg"
-          style={{ float: "left" }}
+          className="btn btn-danger btn-lg"
+          onClick={() => resetPhotoUpdate()}
         >
           Discard
         </button>

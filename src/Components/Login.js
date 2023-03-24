@@ -1,9 +1,11 @@
-import axios from "axios";
+import axios from "../api/axios";
 import { BASE_URL } from "../utils/Constants";
 import { useState } from "react";
 import LoginAndRegisterHeaderbar from "./Common/LoginAndRegisterHeaderbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Login.css";
+import Modal from "./Modals/Modal";
+import useAuth from "../hooks/useAuth";
 
 import React from "react";
 import {
@@ -18,6 +20,7 @@ import img from "../assets/login-background-1.jpg";
 import Loader from "./Common/Loader";
 
 function Login() {
+  const { setAuth } = useAuth();
   const initialFormValues = {
     email: "",
     password: "",
@@ -26,7 +29,8 @@ function Login() {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState({});
   const [loader, setLoader] = useState(false);
-
+  const [modal, setModal] = useState({});
+  const navigate = useNavigate();
   const validateLogin = () => {
     const errors = {};
     if (!formValues.email) {
@@ -34,6 +38,15 @@ function Login() {
     }
     if (!formValues.password) {
       errors.password = "Password is required";
+    }
+    if (formValues.password.length < 6) {
+      errors.password = "Password must be at least 6 characters";
+    }
+    if (
+      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formValues.email) ===
+      false
+    ) {
+      errors.email = "Invalid email format";
     }
     return errors;
   };
@@ -51,32 +64,78 @@ function Login() {
       };
 
       axios
-        .post(BASE_URL + "/login", loginPayload)
+        .post("/login", loginPayload, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        })
         .then((response) => {
-          localStorage.setItem("access_token", response.data.token);
-          localStorage.setItem("refresh_token", response.data.refreshToken);
-          if (response.isBookingUser) {
-            localStorage.setItem("role", "user");
-            //redirect
-          }
-          if (response.isStaff) {
-            localStorage.setItem("role", "staff");
-          }
-          if (response.isSuperAdmin) {
-            localStorage.setItem("role", "admin");
-          }
+          const access_token = response.data.token;
+          const role = response.data.role;
+          const id = response.data.id;
+          setAuth({
+            email: formValues.email,
+            password: formValues.password,
+            accessToken: access_token,
+            role,
+            id,
+          });
+          // localStorage.setItem("access_token", response.data.token);
+          // localStorage.setItem("refresh_token", response.data.refreshToken);
+          // if (response.isBookingUser) {
+          //   localStorage.setItem("role", "user");
+          //   //redirect
+          // }
+          // if (response.isStaff) {
+          //   localStorage.setItem("role", "staff");
+          // }
+          // if (response.isSuperAdmin) {
+          //   localStorage.setItem("role", "admin");
+          // }
           setLoader(false);
+          // navigate("/user-dashboard");
+          if (role.isBookingUser) {
+            navigate("/user-dashboard");
+          } else if (role.isStaff) {
+            navigate("/staff-dashboard");
+          } else if (role.isSuperAdmin) {
+            navigate("/superAdmin-dashboard");
+          }
           // redirect to the appropriate landing page
         })
         .catch((error) => {
-          console.log(error);
           setLoader(false);
+          let errorMessage = "";
+          if (!error?.response) {
+            errorMessage = "No response from server";
+          } else if (error?.response?.status === 400) {
+            errorMessage = "Provide Email and Password correctly";
+          } else if (error?.response?.status === 401) {
+            errorMessage = "Invalid credentials";
+          } else {
+            errorMessage = "Login failed";
+          }
+          setModal({
+            show: true,
+            title: "Error",
+            message: errorMessage,
+            type: "failure",
+          });
         });
     }
   };
   return (
     <MDBContainer fluid>
       {loader ? <Loader /> : ""}
+      {modal.show ? (
+        <Modal
+          modal={setModal}
+          title={modal.title}
+          message={modal.message}
+          type={modal.type}
+        />
+      ) : (
+        ""
+      )}
       <MDBRow>
         <MDBCol sm="6">
           <div className="d-flex flex-row ps-5 pt-5">
@@ -127,7 +186,7 @@ function Login() {
               Submit
             </button>
             <p className="small mb-5 pb-lg-3 ms-5">
-              <a class="text-muted" href="#!">
+              <a className="text-muted" href="#!">
                 Forgot password?
               </a>
             </p>

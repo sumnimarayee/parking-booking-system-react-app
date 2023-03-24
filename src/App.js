@@ -10,56 +10,48 @@ import Esewa from "./Components/Esewa";
 import Sidebar from "./Components/sidebar/Sidebar";
 import InitialUpdate from "./Components/StaffProfileUpdate/InitialUpdate";
 import StaffDashboard from "./Components/StaffDashboard/StaffDashboard";
+import Layout from "./Components/Layout";
+import RequireAuth from "./Components/RequireAuth";
+import NotFound from "./Components/FallbackComponents/NotFound";
+import Unauthorized from "./Components/FallbackComponents/Unauthorized";
+import PersistLogin from "./Components/PersistLogin";
 
 function App() {
   return (
-    <div class="container-fluid">
-      <div class="row">
-        {/* <div class="col-sm-2" style={{ padding: "0" }}>
-          <Sidebar />
-        </div> */}
-        <div class="col-sm-12" style={{ padding: "0" }}>
-          <Router>
-            <Routes>
-              {/* <Route path="/" element={<InitialUpdate />} /> */}
-              <Route path="/" element={<StaffDashboard />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/user-dashboard" element={<UserDashboard />} />
-              <Route
-                path="/superAdmin-dashboard"
-                element={<SuperAdminDashboard />}
-              />
-              <Route path="/add-parkinglot" element={<AddParkingLot />} />
-              <Route path="/book" element={<BookingInformation />} />
-              <Route path="/time-selection" element={<TimeSelection />} />
-              <Route path="/parking-payment" element={<Esewa />} />
-            </Routes>
-          </Router>
-        </div>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route element={<PersistLogin />}>
+          {/* Staff specific routes */}
+          <Route element={<RequireAuth roleName="isStaff" />}>
+            <Route path="/initial-update" element={<InitialUpdate />} />
+            <Route path="/staff-dashboard" element={<StaffDashboard />} />
+          </Route>
 
-    // <div style={{ display: "flex" }}>
-    //   <Sidebar />
-    //   <div>
-    //     <Router>
-    //       <Routes>
-    //         <Route path="/login" element={<Login />} />
-    //         <Route path="/register" element={<Register />} />
-    //         <Route path="/user-dashboard" element={<UserDashboard />} />
-    //         <Route
-    //           path="/superAdmin-dashboard"
-    //           element={<SuperAdminDashboard />}
-    //         />
-    //         <Route path="/add-parkinglot" element={<AddParkingLot />} />
-    //         <Route path="/book" element={<BookingInformation />} />
-    //         <Route path="/test" element={<TimeSelection />} />
-    //         <Route path="/parking-payment" element={<Esewa />} />
-    //       </Routes>
-    //     </Router>
-    //   </div>
-    // </div>
+          {/* User specific routes */}
+          <Route element={<RequireAuth roleName="isBookingUser" />}>
+            <Route path="/user-dashboard" element={<UserDashboard />} />
+            <Route path="/book" element={<BookingInformation />} />
+            <Route path="/time-selection" element={<TimeSelection />} />
+            <Route path="/parking-payment" element={<Esewa />} />
+          </Route>
+
+          {/* SuperAdmin specific routes */}
+          <Route element={<RequireAuth roleName="isSuperAdmin" />}>
+            <Route
+              path="/superAdmin-dashboard"
+              element={<SuperAdminDashboard />}
+            />
+            <Route path="/add-parkinglot" element={<AddParkingLot />} />
+          </Route>
+        </Route>
+
+        {/* Fallback components */}
+        <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
 
