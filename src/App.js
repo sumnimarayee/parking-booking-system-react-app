@@ -15,6 +15,7 @@ import RequireAuth from "./Components/RequireAuth";
 import NotFound from "./Components/FallbackComponents/NotFound";
 import Unauthorized from "./Components/FallbackComponents/Unauthorized";
 import PersistLogin from "./Components/PersistLogin";
+import Esewa2 from "./Components/Esewa2";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/test" element={<Esewa2 />} />
         <Route element={<PersistLogin />}>
           {/* Staff specific routes */}
           <Route element={<RequireAuth roleName="isStaff" />}>

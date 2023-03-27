@@ -1,38 +1,184 @@
-.booking-filter-container {
-  height: 32px;
-  /* background: red; */
-  border: 1px solid skyblue;
-  margin: 5px;
+.user-dashboard-container {
+  padding: 1px;
+}
+
+.marker-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.mapboxgl-popup {
+  width: 600px;
+  font-size: 14px;
+  font-family: sans-serif;
+  padding: 10px;
   border-radius: 5px;
+  color: rgb(128, 134, 139);
+  position: relative;
+  z-index: 1000;
+  background: none;
+  background-color: none;
+  font-size: 0.8rem;
+}
+
+.mapboxgl-popup-close-button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: rgb(128, 134, 139);
+  cursor: pointer;
+}
+
+.mapboxgl-popup-content {
+  background-color: rgb(32, 33, 36);
+
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
+
+  /* width: 20; */
+}
+
+.mapboxgl-popup-content p {
+  margin: 0;
+}
+
+.mapboxgl-popup-tip {
+  display: none;
+}
+
+.popup-heading {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.popup-body {
+  margin-bottom: 8px;
+}
+
+.popup-footer {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+}
+
+.popup-footer button {
+  border: none;
+  border-radius: 4px;
+  background-color: lightblue;
+  border: 1px solid gray;
+}
+
+.popup-body .rating-container {
+  display: flex;
+  align-items: center;
+}
+
+.popup-body .open-closed-container {
+  display: flex;
+  align-items: center;
+}
+
+.filter-sidebar {
+  height: 90vh;
+  width: 20vw;
+  background-color: #222;
+  color: #fff;
+  position: fixed;
+  z-index: 100;
+  border-radius: 1px;
+  top: 48px;
+  right: -300px;
+  transition: transform 0.2s ease-in-out;
+  padding: 15px;
+}
+
+.filter-sidebar-display {
+  /* left: 0px; */
+  transform: translateX(-300px);
+}
+
+.filter-icon-holder {
+  position: absolute;
+  top: 104px;
+  right: 12px;
+  z-index: 100;
+  background-color: white;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+@media (max-width: 639px) {
+  .filter-icon-holder {
+    top: 115px;
+    padding: 12px;
+  }
+  .filter-sidebar {
+    width: 40vw;
+  }
+}
+
+@media (max-width: 1000px) {
+  .price-filter-inputs {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  .price-filter-container select {
+    width: 6rem !important;
+  }
+}
+
+.filter-sidebar .filter-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid wheat;
+}
+
+.filter-sidebar .filter-sidebar-body {
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid wheat;
 }
 
 .price-filter-container {
   display: flex;
-  flex-direction: row;
-  background-color: #d8d0e9;
-  padding: 0px 5px;
-  margin: 2px;
-  /* border: 1px solid red; */
-  border-radius: 7px;
-}
-.price-filter-container .price-input {
-  width: 80px;
-  margin: 0px 5px 0px 5px;
-  height: 22px;
-  /* vertical-align: middle; */
+  flex-direction: column;
 }
 
-.price-filter-container button {
-  border: none;
-  background-color: transparent;
-  /* margin: 2px; */
-  /* vertical-align: middle; */
+.price-filter-inputs {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
 }
 
-.price-filter-container .form-select {
-  height: 24px;
-  font-size: 12px;
-  line-height: 9px;
+.price-filter-container input {
+  width: 6rem;
+}
+.price-filter-container select {
+  width: 10rem;
+  height: 2rem;
+  font-size: 0.8rem;
+}
+
+.filter-sidebar-body label {
+  font-size: 0.9rem;
+}
+
+.filter-sidebar-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.filter-sidebar-footer button {
+  border-radius: 6px;
+  background-color: aquamarine;
+  width: 16rem;
+  height: 2rem;
 }

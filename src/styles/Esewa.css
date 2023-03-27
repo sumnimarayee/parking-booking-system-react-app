@@ -1,0 +1,99 @@
+.esewa-container {
+  padding: 0px 10%;
+  background-color: rgb(245, 245, 253);
+  height: 100vh;
+}
+
+.esewa-container .esewa-header {
+  height: 3rem;
+  background-color: rgb(66, 161, 35);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.esewa-container .esewa-body {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2rem;
+  flex-wrap: wrap-reverse;
+}
+
+.esewa-container .esewa-body .body-left {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  height: 60vh;
+  background-color: white;
+  width: 600px;
+}
+.esewa-container .esewa-body .body-right {
+  padding: 20px;
+  height: 60vh;
+  background-color: white;
+  width: 350px;
+}
+.esewa-container .esewa-body .body-heading {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.esewa-container .esewa-body .left-body-subheading {
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.esewa-container .price-list-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.esewa-container .price-list-container .price-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2.4rem;
+  border-top: 1px solid rgb(231, 230, 232);
+  padding: 0 10px;
+}
+.esewa-container .price-list-container .total-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2.4rem;
+  padding: 0 10px;
+  background-color: rgb(197, 196, 197);
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+.esewa-container .esewa-body form label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding-left: 10px;
+}
+
+.esewa-container .esewa-body .payment-buttons {
+  margin-top: 1.5rem;
+}
+
+.esewa-container .esewa-body .payment-buttons button {
+  width: 6rem;
+  height: 2.5rem;
+  margin-right: 0.8rem;
+  border: none;
+  font-size: 1rem;
+  flex-shrink: 1;
+}
+
+.esewa-container .esewa-body .payment-buttons .confirm-button {
+  background-color: rgb(65, 153, 70);
+  color: white;
+}
+.esewa-container .esewa-body .payment-buttons .cancel-button {
+  background-color: rgb(187, 185, 187);
+}

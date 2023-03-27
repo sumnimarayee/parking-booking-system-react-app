@@ -1,0 +1,27 @@
+/* .image-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.slider-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s ease;
+} */
+
+.slider-item.active {
+  transform: translateX(0%);
+}
+
+.slider-item.left {
+  transform: translateX(-100%);
+}
+
+.slider-item.right {
+  transform: translateX(100%);
+}
