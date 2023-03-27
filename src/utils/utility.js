@@ -1,3 +1,5 @@
+const { ResetTvRounded, CurrencyBitcoin } = require("@mui/icons-material");
+
 exports.computeStaffProfileUpdatePercentage = (updatedItems) => {
   let percentage = 0;
 
@@ -36,4 +38,12 @@ exports.computeStaffProfileUpdatePercentage = (updatedItems) => {
   console.log("COMPUTED PERCENTAGE =  " + percentage);
 
   return percentage;
+};
+
+exports.getCurrentTimeInHHMMFormat = () => {
+  const currentDate = new Date();
+  const hours = currentDate.getHours().toString().padStart(2, "0");
+  const minutes = currentDate.getMinutes().toString().padStart(2, "0");
+  const currentTime = `${hours}:${minutes}`;
+  return currentTime;
 };

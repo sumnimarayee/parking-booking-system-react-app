@@ -27,7 +27,7 @@ const Esewa = () => {
     const totalHour = end[0] - start[0];
     const totalMinute = end[1] - start[1];
     const totalHourCost = totalHour * pricePerHour;
-    const totalMinuteCost = (pricePerHour / 60) * totalMinute;
+    const totalMinuteCost = (pricePerHour / 60) * totalMinute;  
     const totalCost = totalHourCost + totalMinuteCost;
     return totalCost;
   };
