@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BsFillTrashFill } from "react-icons/bs";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import { BASE_URL } from "../utils/Constants";
 
 const SuperAdminDashboard = () => {
   const [data, setData] = useState([]);
@@ -53,7 +51,7 @@ const SuperAdminDashboard = () => {
                   className=" bi bi-trash"
                   onClick={() => handleDelete(index)}
                 >
-                  <BsFillTrashFill />
+                  {/* <BsFillTrashFill /> */}
                 </span>
               </td>
             </tr>

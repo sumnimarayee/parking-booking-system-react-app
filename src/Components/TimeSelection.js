@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import TimePicker from "react-time-picker";
+// import TimePicker from "react-time-picker";
 import useAxiosprivate from "../hooks/useAxiosPrivate";
 
 const TimeSelection = () => {
@@ -74,7 +74,7 @@ const TimeSelection = () => {
 
   return (
     <div>
-      <TimePicker
+      {/* <TimePicker
         onChange={setStartTime}
         value={startTime}
         hourPlaceholder="hh"
@@ -99,7 +99,7 @@ const TimeSelection = () => {
         onChange={(e) => setVehiclePlateNo(e.target.value)}
       />
       {/* add a continue button which when clicked performs a validation and after validation is success call esewa payment page. */}
-      <button onClick={() => validateTimeSelection()}>continue</button>
+      <button onClick={() => validateTimeSelection()}>continue</button> */}
     </div>
   );
 };

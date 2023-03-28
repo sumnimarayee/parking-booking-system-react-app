@@ -364,9 +364,11 @@ export default function UserDashboard() {
               <div className="popup-footer">
                 <button
                   onClick={() => {
-                    navigate("/book", {
-                      state: { parkingLotId: selectedPark._id },
-                    });
+                    localStorage.setItem(
+                      "userSelectedParkingLotId",
+                      selectedPark._id
+                    );
+                    navigate("/book");
                   }}
                 >
                   Details

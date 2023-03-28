@@ -130,7 +130,8 @@ function StaffDashboard() {
                 <div>
                   Update the profile for all section from the "update profile"
                   <br />
-                  section by clicking on the button below.
+                  section with at least 3 images by clicking on the button
+                  below.
                 </div>
               </div>
             </div>

@@ -1,49 +1,81 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosprivate from "../hooks/useAxiosPrivate";
-import ImageCarousel from "./Common/ImageCarousel";
-
-const images = [
-  "https://www.shutterstock.com/image-photo/businessman-eyeglasses-using-mobile-phone-600w-2259903907.jpg",
-  "https://www.shutterstock.com/image-photo/happy-gay-person-boyfriend-walking-600w-2259895345.jpg",
-];
+import SlideShow from "./Common/SlideShow";
+import "../styles/BookingInformation.css";
+import CarIcon from "@mui/icons-material/DirectionsCar";
+import BikeIcon from "@mui/icons-material/TwoWheeler";
 
 const BookingInformation = () => {
-  const { state } = useLocation();
-  const { parkingLotId } = state;
   const [parkingLot, setParkingLot] = useState({ imageURLs: [] });
   const navigate = useNavigate();
   const axios = useAxiosprivate();
 
   useEffect(() => {
-    console.log("inside useeffect");
+    console.log("inside use effect");
+    const parkingLotId = localStorage.getItem("userSelectedParkingLotId");
+    if (!parkingLotId) {
+      navigate("/user-dashboard");
+    }
     async function fetch() {
       const data = await axios.get(`/parking-lot/${parkingLotId}`, {});
       setParkingLot(data.data.data);
+      console.log(data.data.data);
     }
     fetch();
   }, []);
   return (
     <div className="booking-information-container">
-      <ImageCarousel images={images} />
+      <div className="information-header">
+        <div>{parkingLot.name}</div>
+      </div>
+      <div className="information-container">
+        <div className="row information-tiles">
+          <div className="col-lg-7" style={{ padding: 0 }}>
+            <SlideShow images={parkingLot.imageURLs} />
+          </div>
+          <div className="col-lg-5 device-info-block" style={{ padding: 0 }}>
+            <div className="first-row">
+              <div className="first-item">
+                <CarIcon style={{ width: "2.5rem", height: "2.5rem" }} />
+                <div>{`RS. ${parkingLot?.carParkingCostPerHour}/Hour`}</div>
+                <div>{`${
+                  parkingLot?.carParkingCapacity -
+                    parkingLot?.fourWheelerBookedSlots?.length || 0
+                } - Slots available`}</div>
+              </div>
+              <div className="second-item">
+                <BikeIcon style={{ width: "2.5rem", height: "2.5rem" }} />
+                <div>{`RS. ${parkingLot?.bikeParkingCostPerHour}/Hour`}</div>
+                <div>{`${
+                  parkingLot?.bikeParkingCapacity -
+                    parkingLot?.twoWheelerBookedSlots?.length || 0
+                } - Slots available`}</div>
+              </div>
+            </div>
+            <div className="second-row">
+              <div className="first-item">
+                <div style={{ cursor: "pointer" }}>
+                  <u>Book Car Slot</u>
+                </div>
+              </div>
+              <div className="second-item">
+                <div style={{ cursor: "pointer" }}>
+                  <u>Book Bike Slot</u>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <p className="parkingLotName">name: {parkingLot.name}</p>
-      <p className="parkingLotLocation">location: {parkingLot.location}</p>
-      <p className="bikeCapacity">
-        bikeParkingCapacity: {parkingLot.bikeParkingCapacity}
-      </p>
-      <p className="carCapacity">
-        carParkingCapacity: {parkingLot.carParkingCapacity}
-      </p>
-      <p className="openingTime">openingTime: {parkingLot.openingTime}</p>
-      <p className="closingTime">closingTime: {parkingLot.closingTime}</p>
-      <p className="bikeCostPerHour">
-        bikeParkingCostPerHour: {parkingLot.bikeParkingCostPerHour}
-      </p>
-      <p className="carCostPerHour">
-        carParkingCostPerHour: {parkingLot.carParkingCostPerHour}
-      </p>
-      <button
+      <div className="time-selectcontainer">
+        <div className="time-card">
+          {/* <MobileTimePicker defaultValue={dayjs('2022-04-17T15:30')} /> */}
+        </div>
+      </div>
+
+      {/* <button
         type="button"
         className="btn btn-outline-info"
         onClick={() => {
@@ -64,7 +96,7 @@ const BookingInformation = () => {
         }}
       >
         Bike
-      </button>
+      </button> */}
     </div>
   );
 };
