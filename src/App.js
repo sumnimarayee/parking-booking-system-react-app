@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddParkingLot from "./Components/AddParkingLot";
 import BookingInformation from "./Components/BookingInformation";
 import TimeSelection from "./Components/TimeSelection";
-import Esewa from "./Components/Esewa";
 import Sidebar from "./Components/sidebar/Sidebar";
 import InitialUpdate from "./Components/StaffProfileUpdate/InitialUpdate";
 import StaffDashboard from "./Components/StaffDashboard/StaffDashboard";
@@ -15,7 +14,9 @@ import RequireAuth from "./Components/RequireAuth";
 import NotFound from "./Components/FallbackComponents/NotFound";
 import Unauthorized from "./Components/FallbackComponents/Unauthorized";
 import PersistLogin from "./Components/PersistLogin";
-import Esewa2 from "./Components/Esewa2";
+import ParkingPayment from "./Components/ParkingPayment";
+import UsersTable from "./Components/Common/userTable";
+import Analytics from "./Components/Analytics/index";
 
 function App() {
   return (
@@ -23,12 +24,12 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/test" element={<Esewa2 />} />
         <Route element={<PersistLogin />}>
           {/* Staff specific routes */}
           <Route element={<RequireAuth roleName="isStaff" />}>
             <Route path="/initial-update" element={<InitialUpdate />} />
             <Route path="/staff-dashboard" element={<StaffDashboard />} />
+            <Route path="/test" element={<Analytics />} />
           </Route>
 
           {/* User specific routes */}
@@ -36,7 +37,7 @@ function App() {
             <Route path="/user-dashboard" element={<UserDashboard />} />
             <Route path="/book" element={<BookingInformation />} />
             <Route path="/time-selection" element={<TimeSelection />} />
-            <Route path="/parking-payment" element={<Esewa />} />
+            <Route path="/parking-payment" element={<ParkingPayment />} />
           </Route>
 
           {/* SuperAdmin specific routes */}

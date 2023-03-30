@@ -5,13 +5,13 @@
   color: #fff;
   position: fixed;
   z-index: 100;
-  left: -300px;
+  left: -400px;
   transition: transform 0.2s ease-in-out;
 }
 
 .Sidebar-display {
   /* left: 0px; */
-  transform: translateX(300px);
+  transform: translateX(400px);
 }
 
 .SidebarList {
@@ -49,5 +49,5 @@
 }
 
 .SidebarList #active {
-  background-color: rgb(56, 42, 211);
+  background-color: rgb(100, 49, 49);
 }

@@ -22,11 +22,11 @@ export const userSidebar = [
   { title: "Logout", icon: <LogoutIcon />, link: "/" },
 ];
 export const staffSidebar = [
-  { title: "Dashboard", icon: <DashboardIcon />, link: "/something" },
+  { title: "Dashboard", icon: <DashboardIcon />, link: "/staff-dashboard" },
   {
     title: "Manage ParkingLot",
     icon: <AccountCircleIcon />,
-    link: "/something",
+    link: "/initial-update",
   },
   { title: "Analytics", icon: <BarChartIcon />, link: "/booking" },
   { title: "View Reviews", icon: <RateReviewIcon />, link: "/previous" },

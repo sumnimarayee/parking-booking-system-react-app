@@ -3,15 +3,24 @@
   padding: 0;
   width: 102vw;
   height: 100vh;
-  background-color: rgb(52, 42, 42);
+  /* background-color: rgb(52, 42, 42); */
   position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  opacity: 0.9;
+  /* opacity: 0.9; */
   left: -10px;
   top: 0;
+}
+
+.transparent-background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(52, 42, 42);
+  opacity: 0.9;
+  z-index: 99;
 }
 
 .modalContainer {
@@ -24,6 +33,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  z-index: 100;
 }
 
 .modalContainer .title {
@@ -67,6 +78,16 @@
   /* justify-content: center; */
   /* align-items: center; */
   margin-top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.confirmation-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .modalContainer .footer button {

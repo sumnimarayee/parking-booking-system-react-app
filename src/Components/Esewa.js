@@ -21,13 +21,12 @@ const Esewa = () => {
   }, []);
 
   const calculateTotalCost = (startTime, endTime, pricePerHour) => {
-    console.log("from v " + startTime + " " + endTime + " " + pricePerHour);
     const start = startTime.split(":");
     const end = endTime.split(":");
     const totalHour = end[0] - start[0];
     const totalMinute = end[1] - start[1];
     const totalHourCost = totalHour * pricePerHour;
-    const totalMinuteCost = (pricePerHour / 60) * totalMinute;  
+    const totalMinuteCost = (pricePerHour / 60) * totalMinute;
     const totalCost = totalHourCost + totalMinuteCost;
     return totalCost;
   };
@@ -41,14 +40,6 @@ const Esewa = () => {
       bookedTime: `${startTime}-${endTime}`,
       pinNo,
     };
-    axios
-      .post(`/booking`, bookingPayload)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   return (

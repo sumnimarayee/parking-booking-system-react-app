@@ -65,6 +65,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 .device-info-block .second-row .second-item {
   width: 50%;
@@ -73,6 +74,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .time-select-container {
@@ -90,6 +92,56 @@
 .time-card {
   border-radius: 5px;
   background-color: #fff;
+  height: 40%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.react-ios-time-picker-input {
+  background-color: #333;
+  color: white;
+  width: 5.5rem;
+  text-align: center;
+  cursor: pointer !important;
+}
+
+.time-selectors {
+  border: 1px solid #333;
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.time-card label {
+  font-size: 0.8rem;
+  margin-left: 0.1rem;
+}
+
+.time-selectors {
+  display: flex;
+  width: 60%;
+  justify-content: space-around;
+}
+
+.plate-number-input {
+  width: 50%;
+  margin-top: 1.2rem;
+}
+
+.button-container {
+  display: flex;
+  width: 60%;
+  justify-content: space-around;
+}
+
+.button-container button {
+  width: 6rem;
+}
+
+.hidden {
+  display: none;
 }
 
 @media (max-width: 900px) {

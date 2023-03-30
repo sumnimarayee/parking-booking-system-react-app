@@ -1,0 +1,28 @@
+.analytics-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 40px;
+}
+
+.analytics-container .chart-container {
+  height: 360px;
+
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-container .chart-filter-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.chart-container .filter-selector select {
+  height: 28px;
+  font-size: 12px;
+  padding: 2px 26px 2px 6px;
+  border-radius: 5px;
+}

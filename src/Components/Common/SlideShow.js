@@ -2,7 +2,7 @@ import React from "react";
 import "../../styles/SlideShow.css";
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "orange", "yellow"];
-const delay = 3500000;
+const delay = 4500;
 
 const SlideShow = ({ images }) => {
   const [index, setIndex] = React.useState(0);

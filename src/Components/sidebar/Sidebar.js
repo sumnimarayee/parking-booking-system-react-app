@@ -25,7 +25,7 @@ const Sidebar = ({ displaySidebar }) => {
               onClick={async () => {
                 val.title === "Logout" ? await logout() : console.log("");
                 console.log("logout found");
-                // window.location.pathname = val.link;
+                window.location.pathname = val.link;
               }}
               id={window.location.pathname == val.link ? "active" : ""}
             >
