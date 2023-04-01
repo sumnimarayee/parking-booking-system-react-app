@@ -4,17 +4,6 @@ import { Chart, ArcElement, Legend, Title, Tooltip } from "chart.js";
 
 Chart.register(ArcElement, Legend, Title, Tooltip);
 
-const data = {
-  labels: ["Red", "Blue", "Yellow"],
-  datasets: [
-    {
-      data: [300, 50, 100],
-      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-      hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-    },
-  ],
-};
-
 const options = {
   responsive: true,
   maintainAspectRatio: false,
@@ -24,7 +13,7 @@ const options = {
       position: "bottom",
       align: "center",
       labels: {
-        fontSize: 14,
+        fontSize: 16,
         fontColor: "black",
         boxWidth: 20,
         usePointStyle: true,
@@ -40,7 +29,18 @@ const options = {
   },
 };
 
-const PieChart = () => {
+const PieChart = ({ label, dataSetData }) => {
+  const data = {
+    labels: label,
+    datasets: [
+      {
+        data: dataSetData,
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+      },
+    ],
+  };
+
   return <Pie data={data} options={options} />;
 };
 

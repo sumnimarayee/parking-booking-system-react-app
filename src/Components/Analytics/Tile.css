@@ -1,0 +1,30 @@
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 280px;
+  height: 220px;
+  color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 10px;
+  position: relative;
+  bottom: 30px;
+}
+.revenue-tile {
+  background-color: #cd47dd;
+}
+.bookings-tile {
+  background-color: #ff4b5c;
+}
+
+.tile .title {
+  font-size: 1.2rem;
+}
+
+.tile .value {
+  font-size: 24px;
+  font-weight: bold;
+}

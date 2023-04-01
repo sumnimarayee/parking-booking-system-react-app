@@ -28,7 +28,7 @@ export const staffSidebar = [
     icon: <AccountCircleIcon />,
     link: "/initial-update",
   },
-  { title: "Analytics", icon: <BarChartIcon />, link: "/booking" },
+  { title: "Analytics", icon: <BarChartIcon />, link: "/analytics" },
   { title: "View Reviews", icon: <RateReviewIcon />, link: "/previous" },
   { title: "Logout", icon: <LogoutIcon />, link: "/" },
 ];

@@ -10,33 +10,12 @@ import {
 
 Chart.register(CategoryScale, LinearScale, BarController, BarElement);
 
-const data = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
-  datasets: [
-    {
-      label: "Sales",
-      data: [65, 59, 80, 81, 56, 55, 40],
-      backgroundColor: "rgba(54, 162, 235, 0.5)",
-      borderColor: "rgba(54, 162, 235, 1)",
-      borderWidth: 1,
-    },
-    {
-      label: "Expenses",
-      data: [28, 48, 40, 19, 86, 27, 90],
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-      borderColor: "rgba(255, 99, 132, 1)",
-      borderWidth: 1,
-    },
-  ],
-};
-
 const options = {
   responsive: true,
   maintainAspectRatio: false,
   scales: {
     x: {
       type: "category",
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
     },
     y: {
       beginAtZero: true,
@@ -44,20 +23,46 @@ const options = {
   },
   plugins: {
     legend: {
+      display: true,
       position: "bottom",
+      align: "center",
       labels: {
+        fontSize: 16,
+        fontColor: "black",
+        boxWidth: 20,
         usePointStyle: true,
-        boxWidth: 6,
-        font: {
-          size: 10,
-          weight: "bold",
+      },
+    },
+    tooltips: {
+      callbacks: {
+        label: function (context) {
+          return context.label + ": " + context.parsed + "%";
         },
       },
     },
   },
 };
 
-const BarChart = () => {
+const BarChart = ({ label, twoWheelerData, fourWheelerData }) => {
+  const data = {
+    labels: label,
+    datasets: [
+      {
+        label: "Two-Wheeler",
+        data: twoWheelerData,
+        backgroundColor: "rgba(54, 162, 235, 0.5)",
+        borderColor: "rgba(54, 162, 235, 1)",
+        borderWidth: 1,
+      },
+      {
+        label: "Four-Wheeler",
+        data: fourWheelerData,
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: "rgba(255, 99, 132, 1)",
+        borderWidth: 1,
+      },
+    ],
+  };
   return <Bar data={data} options={options} />;
 };
 

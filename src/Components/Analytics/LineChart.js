@@ -24,7 +24,6 @@ const options = {
   scales: {
     x: {
       type: "category",
-      //   labels: ["January", "February", "March", "April", "May", "June", "July"],
     },
     y: {
       beginAtZero: true,
@@ -32,13 +31,20 @@ const options = {
   },
   plugins: {
     legend: {
+      display: true,
       position: "bottom",
+      align: "center",
       labels: {
+        fontSize: 16,
+        fontColor: "black",
+        boxWidth: 20,
         usePointStyle: true,
-        boxWidth: 6,
-        font: {
-          size: 10,
-          weight: "bold",
+      },
+    },
+    tooltips: {
+      callbacks: {
+        label: function (context) {
+          return context.label + ": " + context.parsed + "%";
         },
       },
     },
@@ -46,8 +52,6 @@ const options = {
 };
 
 const LineChart = ({ label, dataSetData }) => {
-  //   const [dataSetData, setDataSetData] = useState([]);
-  //   const [label, setLabel] = useState([]);
   const data = {
     labels: label,
     datasets: [

@@ -29,7 +29,7 @@ function App() {
           <Route element={<RequireAuth roleName="isStaff" />}>
             <Route path="/initial-update" element={<InitialUpdate />} />
             <Route path="/staff-dashboard" element={<StaffDashboard />} />
-            <Route path="/test" element={<Analytics />} />
+            <Route path="/analytics" element={<Analytics />} />
           </Route>
 
           {/* User specific routes */}

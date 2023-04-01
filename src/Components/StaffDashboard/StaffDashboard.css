@@ -35,6 +35,7 @@
   transition: transform 0.2s ease-in-out;
   padding: 10px 10px;
   display: hidden !important;
+  z-index: 100;
 }
 
 .manual-entry-box-display {

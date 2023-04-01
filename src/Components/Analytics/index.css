@@ -1,23 +1,46 @@
 .analytics-container {
   display: flex;
   flex-wrap: wrap;
-  padding: 40px;
+  padding: 5px;
+  justify-content: center;
+}
+
+.current-day-data-container {
+  display: flex;
+}
+
+.chart-container .tile-heading {
+  /* margin: auto; */
+  color: #72428b;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 50px;
 }
 
 .analytics-container .chart-container {
-  height: 360px;
-
-  border: 1px solid black;
+  height: 46vh;
+  /* border: 1px solid black; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 49vw;
+  padding: 25px 20px;
+  border: 1px solid lightblue;
 }
 
 .chart-container .chart-filter-container {
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  align-items: center;
+}
+
+.chart-filter-container .chart-heading {
+  margin: 0px 27% 0px 0px;
+  color: #72428b;
+  font-weight: 600;
+  font-size: 1.2rem;
 }
 
 .chart-container .filter-selector select {
