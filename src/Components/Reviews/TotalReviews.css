@@ -1,0 +1,85 @@
+.total-reviews-container {
+  padding: 30px;
+}
+.total-reviews-header {
+  border-bottom: 1px solid gray;
+}
+
+.company-info {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.company-address {
+  font-size: 1rem;
+  font-weight: 500;
+  color: gray;
+  padding: 0 6px;
+}
+
+.rating-data {
+  display: flex;
+  align-items: center;
+}
+
+.rating-data .rating-number {
+  font-size: 1.8rem;
+  color: rgb(242, 99, 6);
+  font-weight: 700;
+  margin-right: 5px;
+}
+
+.rating-data .number-of-reviews {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: gray;
+  margin-left: 10px;
+}
+
+.individual-review-container {
+  margin: 15px 0;
+  display: flex;
+}
+
+.individual-review-container .profile-image-container {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: rgb(192, 3, 196);
+  color: white;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.individual-review-container .text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 8px;
+}
+
+.reviewer-info .reviewer-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.reviewer-info .reviewer-rating-data {
+  display: flex;
+  align-items: center;
+}
+
+.time-of-review {
+  font-size: 0.8rem;
+  color: gray;
+  margin-left: 12px;
+}
+
+.review-text {
+  font-size: 0.9rem;
+}

@@ -70,7 +70,6 @@ function PhotoUpdate({ setProfileCompletedPercentage }) {
 
   const uploadToFirebase = (image) => {
     setLoader(true);
-    console.log("upload to firebase called");
     const imageRef = ref(storage, v4());
     uploadBytes(imageRef, image)
       .then((snapshot) => {

@@ -9,17 +9,20 @@ import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 
 export const userSidebar = [
-  { title: "Dashboard", icon: <DashboardIcon />, link: "/something" },
-  { title: "Manage Profile", icon: <AccountCircleIcon />, link: "/something" },
+  { title: "Dashboard", icon: <DashboardIcon />, link: "/user-dashboard" },
+  {
+    title: "Manage Profile",
+    icon: <AccountCircleIcon />,
+    link: "/user-profile-update",
+  },
   { title: "Book Slot", icon: <BookOnlineIcon />, link: "/booking" },
   {
     title: "Previous Bookings",
     icon: <ManageHistoryIcon />,
-    link: "/previous",
+    link: "/booking-history",
   },
-  { title: "Write Reviews", icon: <RateReviewIcon />, link: "/review" },
   { title: "Notifications", icon: <NotificationsIcon />, link: "/review" },
-  { title: "Logout", icon: <LogoutIcon />, link: "/" },
+  { title: "Logout", icon: <LogoutIcon />, link: "/login" },
 ];
 export const staffSidebar = [
   { title: "Dashboard", icon: <DashboardIcon />, link: "/staff-dashboard" },
@@ -29,11 +32,11 @@ export const staffSidebar = [
     link: "/initial-update",
   },
   { title: "Analytics", icon: <BarChartIcon />, link: "/analytics" },
-  { title: "View Reviews", icon: <RateReviewIcon />, link: "/previous" },
-  { title: "Logout", icon: <LogoutIcon />, link: "/" },
+  { title: "View Reviews", icon: <RateReviewIcon />, link: "/view-reviews" },
+  { title: "Logout", icon: <LogoutIcon />, link: "/login" },
 ];
 export const superAdminSidebar = [
   { title: "Dashboard", icon: <DashboardIcon />, link: "/something" },
   { title: "Add Parkings", icon: <AddBoxIcon />, link: "/something" },
-  { title: "Logout", icon: <LogoutIcon />, link: "/" },
+  { title: "Logout", icon: <LogoutIcon />, link: "/login" },
 ];

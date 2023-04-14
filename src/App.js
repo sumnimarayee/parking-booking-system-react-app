@@ -17,13 +17,24 @@ import PersistLogin from "./Components/PersistLogin";
 import ParkingPayment from "./Components/ParkingPayment";
 import UsersTable from "./Components/Common/userTable";
 import Analytics from "./Components/Analytics/index";
+import BookingHistory from "./Components/BookingHistory";
+import UserProfileUpdate from "./Components/UserProfileUpdate/UserProfileUpdate";
+import ReviewForm from "./Components/Reviews/ReviewForm";
+import TotalReviews from "./Components/Reviews/TotalReviews";
+import { useEffect } from "react";
+import { io } from "socket.io-client";
 
 function App() {
+  useEffect(() => {
+    console.log("inside the appjs useeffect");
+    const socket = io("http://localhost:3002");
+  }, []);
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/view-reviews/:id" element={<TotalReviews />} />
         <Route element={<PersistLogin />}>
           {/* Staff specific routes */}
           <Route element={<RequireAuth roleName="isStaff" />}>
@@ -38,6 +49,14 @@ function App() {
             <Route path="/book" element={<BookingInformation />} />
             <Route path="/time-selection" element={<TimeSelection />} />
             <Route path="/parking-payment" element={<ParkingPayment />} />
+            <Route path="/booking-history" element={<BookingHistory />} />
+            <Route path="/review/:id" element={<ReviewForm />} />
+            {/* <Route path="/view-reviews/:id" element={<TotalReviews />} /> */}
+
+            <Route
+              path="/user-profile-update"
+              element={<UserProfileUpdate />}
+            />
           </Route>
 
           {/* SuperAdmin specific routes */}

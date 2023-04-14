@@ -39,7 +39,7 @@ function StaffDashboard() {
 
   const axios = useAxiosprivate();
   const navigate = useNavigate();
-  const { auth } = useAuth();
+  const { auth, setAuth } = useAuth();
 
   const timeFormatter = (data, row) => {
     const startTime = data.split("-")[0];
@@ -209,6 +209,7 @@ function StaffDashboard() {
   const fetchParkingLot = async () => {
     const response = await axios.get(`parking-lot/staff/${auth.id}`);
     setTableData(response.data.data.bookings);
+    setAuth({ ...auth, parkingLotId: response.data.data.parkingLot._id });
     const computedPercentage = computeStaffProfileUpdatePercentage(
       response.data.data.parkingLot.updatedItems
     );

@@ -140,7 +140,7 @@ function Login() {
         <MDBCol sm="6">
           <div className="d-flex flex-row ps-5 pt-5">
             <LoginAndRegisterHeaderbar />
-            <MDBIcon fas icon="crow fa-3x me-3" style={{ color: "#709085" }} />
+            {/* <MDBIcon fas icon="crow fa-3x me-3" style={{ color: "#709085" }} /> */}
             {/* <span className="h1 fw-bold mb-0">Logo</span> */}
           </div>
 

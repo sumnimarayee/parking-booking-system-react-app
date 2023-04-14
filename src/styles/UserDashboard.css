@@ -81,6 +81,11 @@
   align-items: center;
 }
 
+.review-icon-container {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
 .filter-sidebar {
   height: 90vh;
   width: 20vw;
@@ -90,14 +95,14 @@
   z-index: 100;
   border-radius: 1px;
   top: 48px;
-  right: -300px;
+  right: -400px;
   transition: transform 0.2s ease-in-out;
   padding: 15px;
 }
 
 .filter-sidebar-display {
   /* left: 0px; */
-  transform: translateX(-300px);
+  transform: translateX(-400px);
 }
 
 .filter-icon-holder {

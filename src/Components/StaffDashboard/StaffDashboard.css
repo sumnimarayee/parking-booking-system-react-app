@@ -136,12 +136,12 @@
   align-items: center;
 }
 .intable-column-time .start-time {
-  background-color: aqua;
+  background-color: lightblue;
   border-radius: 4px;
   padding: 3px;
 }
 .intable-column-time .end-time {
-  background-color: coral;
+  background-color: lightcoral;
   border-radius: 4px;
   padding: 3px;
 }

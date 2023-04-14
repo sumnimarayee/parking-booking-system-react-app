@@ -3,6 +3,7 @@ import "../../styles/Sidebar.css";
 import { userSidebar, staffSidebar, superAdminSidebar } from "./SidebarData";
 import useAuth from "../../hooks/useAuth";
 import useLogout from "../../hooks/useLogout";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ displaySidebar }) => {
   const { auth } = useAuth();
@@ -14,6 +15,7 @@ const Sidebar = ({ displaySidebar }) => {
     ? superAdminSidebar
     : null;
   const logout = useLogout();
+  const navigate = useNavigate();
   return (
     <div className={`Sidebar ${displaySidebar ? "Sidebar-display" : ""}`}>
       <ul className="SidebarList">
@@ -24,8 +26,10 @@ const Sidebar = ({ displaySidebar }) => {
               className="SidebarRow"
               onClick={async () => {
                 val.title === "Logout" ? await logout() : console.log("");
-                console.log("logout found");
-                window.location.pathname = val.link;
+                if (val.link === "/view-reviews") {
+                  val.link = val.link + `/${auth.parkingLotId}`;
+                }
+                navigate(val.link);
               }}
               id={window.location.pathname == val.link ? "active" : ""}
             >

@@ -1,0 +1,23 @@
+.review-container {
+  padding: 40px;
+}
+
+.star-rating {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.star-rating.checked {
+  color: gold;
+}
+
+.review-button-container {
+  display: flex;
+  padding: 10px;
+}
+
+.review-button-container button {
+  margin-right: 10px;
+  width: 180px;
+}

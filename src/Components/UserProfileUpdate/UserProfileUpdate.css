@@ -1,0 +1,85 @@
+.image-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  border-radius: 5%;
+}
+
+.image-overlay {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  border-radius: 5%;
+  cursor: pointer;
+}
+
+.user-profile-update-container {
+  width: 100vw;
+  height: 92vh;
+  background-color: rgb(206, 213, 223);
+  padding: 20px;
+}
+
+.image-wrapper:hover .image-overlay {
+  display: flex;
+}
+
+.profile-update-sections {
+  display: flex;
+  justify-content: space-around;
+}
+.image-update-section {
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: rgb(20, 27, 34);
+  height: 315px;
+}
+.text-update-section {
+  background-color: rgb(255, 255, 255);
+  padding: 30px 40px;
+  border-radius: 6px;
+}
+
+.image-update-section-header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 10px 0;
+}
+.image-update-section-footer {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 10px 0;
+}
+
+.form-group {
+  padding: 10px;
+}
+
+.update-form-dual-item-holder {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-profile-update-container label {
+  font-weight: 600;
+  font-size: 0.8rem;
+  /* color:  */
+}
+
+.user-profile-update-container button {
+  margin: 10px;
+  width: 150px;
+}

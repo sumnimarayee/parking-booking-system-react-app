@@ -16,6 +16,8 @@ import * as turf from "@turf/turf";
 import PlaceIcon from "@mui/icons-material/Place";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import CloseIcon from "@mui/icons-material/Close";
+import RateReviewIcon from "@mui/icons-material/RateReview";
+import PreviewIcon from "@mui/icons-material/Preview";
 import { getCurrentTimeInHHMMFormat } from "../utils/utility";
 
 const GEOFENCE = turf.circle([85.30014, 27.700769], 10, {
@@ -36,6 +38,7 @@ export default function UserDashboard() {
   const [selectedPark, setSelectedPark] = useState(null);
   const [parkingLots, setParkingLots] = useState([]);
   const [showFilterBar, setShowFilterBar] = useState(false);
+  const [avgRating, setAvgRating] = useState({});
 
   // const [zoomLevel, setZoomLevel] = useState(12);
   const [loader, setLoader] = useState(false);
@@ -101,6 +104,11 @@ export default function UserDashboard() {
       }
     }
     setLoader(false);
+  };
+
+  const fetchAverageRating = async (id) => {
+    const response = await axios.get(`/ratings/average-rating/${id}`);
+    setAvgRating(response.data.data);
   };
 
   useEffect(() => {
@@ -300,6 +308,7 @@ export default function UserDashboard() {
               className="marker-btn"
               onMouseEnter={(e) => {
                 e.preventDefault();
+                fetchAverageRating(park._id);
                 setSelectedPark(park);
               }}
             >
@@ -322,15 +331,15 @@ export default function UserDashboard() {
             onClose={() => {
               setSelectedPark(null);
             }}
-            onMouseEnter={() => {
-              console.log("on mouse enter");
-            }}
-            onMouseLeave={(e) => {
-              console.log("on mouse leave");
-              e.preventDefault();
-              setSelectedPark(null);
-            }}
-            closeOnMove={true}
+            // onMouseEnter={() => {
+            //   console.log("on mouse enter");
+            // }}
+            // onMouseLeave={(e) => {
+            //   console.log("on mouse leave");
+            //   e.preventDefault();
+            //   setSelectedPark(null);
+            // }}
+            closeOnMove={false}
           >
             <div className="popup-container">
               <div className="popup-heading">
@@ -339,7 +348,7 @@ export default function UserDashboard() {
               <div className="popup-body">
                 <div>{"Location: " + selectedPark.location}</div>
                 <div className="rating-container" style={{ display: "flex" }}>
-                  <div style={{ marginRight: "4px" }}>{3.5}</div>
+                  <div style={{ marginRight: "4px" }}>{avgRating?.average}</div>
                   <div style={{ marginRight: "8px" }}>
                     {
                       <StarRateIcon
@@ -353,7 +362,31 @@ export default function UserDashboard() {
                       />
                     }
                   </div>
-                  <div>({31})</div>
+                  <div>({avgRating?.count})</div>
+                  <div
+                    className="review-icon-container"
+                    style={{
+                      position: "relative",
+                      top: "2px",
+                    }}
+                    onClick={() => {
+                      navigate(`/review/${selectedPark._id}`);
+                    }}
+                  >
+                    <RateReviewIcon style={{ color: "#7dff7d" }} />
+                  </div>
+                  <div
+                    className="view-ratings"
+                    style={{
+                      marginLeft: "4px",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      navigate(`/view-reviews/${selectedPark._id}`);
+                    }}
+                  >
+                    <PreviewIcon style={{ color: "#7dff7d" }} />
+                  </div>
                 </div>
                 {isShopOpen(
                   selectedPark.openingTime,
