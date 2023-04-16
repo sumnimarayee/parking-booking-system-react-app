@@ -168,6 +168,7 @@ const SlotInformationUpdate = ({ setProfileCompletedPercentage }) => {
                 })
               }
               placeholder="Enter bike parking cost per hour"
+              style={{ outline: "1px solid #ced4da", borderRadius: "5px" }}
             />
             <div className="form-error-message">
               {formErrors.bikeParkingCostPerHour}
@@ -189,6 +190,7 @@ const SlotInformationUpdate = ({ setProfileCompletedPercentage }) => {
                 })
               }
               placeholder="Enter car parking cost per hour"
+              style={{ outline: "1px solid #ced4da", borderRadius: "5px" }}
             />
             <div className="form-error-message">
               {formErrors.carParkingCostPerHour}
@@ -208,6 +210,7 @@ const SlotInformationUpdate = ({ setProfileCompletedPercentage }) => {
                 })
               }
               placeholder="Enter bike parking capacity"
+              style={{ outline: "1px solid #ced4da", borderRadius: "5px" }}
             />
             <div className="form-error-message">
               {formErrors.bikeParkingCapacity}
@@ -227,6 +230,7 @@ const SlotInformationUpdate = ({ setProfileCompletedPercentage }) => {
                 })
               }
               placeholder="Enter car parking capacity"
+              style={{ outline: "1px solid #ced4da", borderRadius: "5px" }}
             />
             <div className="form-error-message">
               {formErrors.carParkingCapacity}

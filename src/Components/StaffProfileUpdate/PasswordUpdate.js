@@ -99,6 +99,7 @@ const PasswordUpdate = ({ setProfileCompletedPercentage }) => {
               setPassword(e.target.value);
             }}
             placeholder="Enter new password"
+            style={{ outline: "1px solid #ced4da", borderRadius: "5px" }}
           />
           <div className="form-error-message  ">{passwordError}</div>
         </div>

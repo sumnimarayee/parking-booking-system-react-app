@@ -38,3 +38,7 @@
 .staff-update-button-holder button {
   width: 180px;
 }
+
+input {
+  outline: "1px solid #ced4da";
+}

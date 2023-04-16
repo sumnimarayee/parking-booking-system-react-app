@@ -14,12 +14,39 @@
 }
 
 .booking-card {
-  height: 300px;
-  width: 450px;
+  height: 180px;
+  width: 400px;
   background-color: rgb(254, 254, 254);
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-
   padding: 15px;
   margin: 15px 0px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    to bottom,
+    lightblue,
+    skyblue,
+    rgb(123, 115, 187),
+    lightgreen
+  );
+}
+
+.booking-card-header {
+  align-self: flex-end;
+  font-size: 0.8rem;
+  color: #333;
+}
+
+.booking-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-card .parking-name {
+  align-self: center;
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 5px;
 }

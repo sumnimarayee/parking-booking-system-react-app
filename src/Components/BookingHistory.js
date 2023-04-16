@@ -33,9 +33,9 @@ const BookingHistory = () => {
     const minutes = diffInMinutes % 60;
 
     const hourString =
-      hours > 0 ? hours + " hour," + (hours > 1 ? "s" : "") + " " : "";
+      hours > 0 ? hours + " hour" + (hours > 1 ? "s" : "") + ", " : "";
     const minuteString =
-      minutes > 0 ? minutes + " minute" + (minutes > 1 ? "s" : "") : "";
+      minutes > 0 ? minutes + " min" + (minutes > 1 ? "s" : "") : "";
 
     return hourString + minuteString;
   };
@@ -53,14 +53,27 @@ const BookingHistory = () => {
                 {getFormattedDate(booking?.createdAt.split("T")[0])}
               </div>
               <div className="booking-card-body">
-                <div>{booking?.parkingLot?.name}</div>
-                <div>
-                  {`${booking?.bookedTime.split("-")[0]} - ${
-                    booking?.bookedTime.split("-")[1]
-                  }  (${computeTimeDifference(booking?.bookedTime)})`}
+                <div className="parking-name">
+                  <div>{booking?.parkingLot?.name}</div>
                 </div>
-                <div>{`Rs ${booking?.payment?.paymentAmount}`}</div>
-                <div>{`Assigned Slot: ${booking?.assignedSlot}`}</div>
+                <div className="row">
+                  <div className="col-sm-4">Assigned Slot: </div>
+                  <div className="col-sm-8">{`${booking?.assignedSlot}`}</div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-4">Booked Time: </div>
+                  <div className="col-sm-8">
+                    {`${booking?.bookedTime.split("-")[0]} - ${
+                      booking?.bookedTime.split("-")[1]
+                    }  (${computeTimeDifference(booking?.bookedTime)})`}
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-4">Amount Paid: </div>
+                  <div className="col-sm-8">{`Rs ${Number(
+                    booking?.payment?.paymentAmount
+                  ).toFixed(2)}`}</div>
+                </div>
               </div>
             </div>
           );

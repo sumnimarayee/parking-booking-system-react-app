@@ -186,6 +186,7 @@ const ParkingLotInformationUpdate = ({ setProfileCompletedPercentage }) => {
                   parkingLotName: e.target.value,
                 })
               }
+              style={{ outline: "1px solid #ced4da", borderRadius: "5px" }}
               placeholder="Enter parking lot name"
             />
             <div className="form-error-message  ">
@@ -205,6 +206,7 @@ const ParkingLotInformationUpdate = ({ setProfileCompletedPercentage }) => {
                   parkingLotLocation: e.target.value,
                 })
               }
+              style={{ outline: "1px solid #ced4da", borderRadius: "5px" }}
               placeholder="Enter parking lot location"
             />
             <div className="form-error-message  ">
@@ -224,6 +226,7 @@ const ParkingLotInformationUpdate = ({ setProfileCompletedPercentage }) => {
                   openingTime: e.target.value,
                 })
               }
+              style={{ outline: "1px solid #ced4da", borderRadius: "5px" }}
               placeholder="Enter parking lot opening time"
             />
             <div className="form-error-message  ">{formErrors.openingTime}</div>
@@ -241,6 +244,7 @@ const ParkingLotInformationUpdate = ({ setProfileCompletedPercentage }) => {
                   closingTime: e.target.value,
                 })
               }
+              style={{ outline: "1px solid #ced4da", borderRadius: "5px" }}
               placeholder="Enter parking lot closing time"
             />
             <div className="form-error-message  ">{formErrors.closingTime}</div>
