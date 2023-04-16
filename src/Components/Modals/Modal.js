@@ -87,8 +87,6 @@ function Modal({
                 onClick={() => {
                   modal({ show: false });
                   if (handleConfirmation) {
-                    console.log("printing whta recieved");
-                    // console.log(data);
                     handleConfirmation(data);
                   }
                   if (navigateTo) {

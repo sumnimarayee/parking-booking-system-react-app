@@ -1,0 +1,52 @@
+.add-parkinglot-container {
+  padding: 0 5px;
+  position: relative;
+}
+
+.information-popup {
+  padding: 10px;
+  border: 2px dotted black;
+  border-radius: 9px;
+  background-color: white;
+  text-align: center;
+  width: 200px;
+  position: absolute;
+  top: 0;
+  right: 6px;
+  z-index: 100;
+  color: #333;
+}
+
+.hidden {
+  display: none;
+}
+
+.information-popup-background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+
+.parking-information-input-form input {
+  margin-top: 5px;
+}
+
+.parking-information-input-form label {
+  margin-top: 10px;
+}
+.location-readonly-form input {
+  margin-top: 5px;
+}
+
+.location-readonly-form label {
+  margin-top: 10px;
+}
+
+.data-input-forms {
+  width: 70vw;
+  margin: auto;
+}

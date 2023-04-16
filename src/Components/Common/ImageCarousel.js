@@ -1,37 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../../styles/ImageCarousel.css";
 
 const ImageCarousel = ({ images }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [direction, setDirection] = useState("left");
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setDirection("left");
-      setActiveIndex((activeIndex + 1) % images.length);
-    }, 3000);
-
-    return () => clearInterval(intervalId);
-  }, [activeIndex]);
-
-  const handleTransitionEnd = () => {
-    console.log("");
-    setDirection("");
-  };
+  const [index, setIndex] = React.useState(0);
 
   return (
-    <div className="image-slider">
-      {images.map((image, index) => (
-        <img
-          key={index}
-          src={image}
-          alt={`Image ${index + 1}`}
-          className={`slider-item ${
-            index === activeIndex ? "active" : ""
-          } ${direction}`}
-          onTransitionEnd={handleTransitionEnd}
-        />
-      ))}
+    <div className="imageCarousel">
+      {images?.length > 0 ? (
+        <div
+          className="slideshowSlider"
+          style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
+        >
+          {images.map((imageUrl, index) => (
+            <div
+              className="slide"
+              key={index}
+              style={{
+                backgroundImage: `url(${imageUrl})`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+              }}
+            ></div>
+          ))}
+        </div>
+      ) : (
+        ""
+      )}
+
+      {images.length === 1 ? (
+        ""
+      ) : (
+        <div className="slideshowDots">
+          {images.map((_, idx) => (
+            <div
+              key={idx}
+              className={`slideshowDot${index === idx ? " active" : ""}`}
+              onClick={() => {
+                setIndex(idx);
+              }}
+            ></div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

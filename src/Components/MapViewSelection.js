@@ -11,7 +11,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import Loader from "./Common/Loader";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import "../styles/UserDashboard.css";
+import "../styles/MapViewSelection.css";
 import * as turf from "@turf/turf";
 import PlaceIcon from "@mui/icons-material/Place";
 import StarRateIcon from "@mui/icons-material/StarRate";
@@ -24,7 +24,7 @@ const GEOFENCE = turf.circle([85.30014, 27.700769], 10, {
   units: "miles",
 });
 
-export default function UserDashboard() {
+export default function MapViewSelection() {
   const navigate = useNavigate();
   // const [lat, setLat] = useState(27.700769);
   // const [lng, setLng] = useState(85.30014);

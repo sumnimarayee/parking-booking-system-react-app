@@ -6,6 +6,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import RateReviewIcon from "@mui/icons-material/RateReview";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
+import MapIcon from "@mui/icons-material/Map";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 
 export const userSidebar = [
@@ -15,7 +16,7 @@ export const userSidebar = [
     icon: <AccountCircleIcon />,
     link: "/user-profile-update",
   },
-  { title: "Book Slot", icon: <BookOnlineIcon />, link: "/booking" },
+  { title: "Browse Map", icon: <MapIcon />, link: "/map-view-selection" },
   {
     title: "Previous Bookings",
     icon: <ManageHistoryIcon />,
@@ -36,7 +37,11 @@ export const staffSidebar = [
   { title: "Logout", icon: <LogoutIcon />, link: "/login" },
 ];
 export const superAdminSidebar = [
-  { title: "Dashboard", icon: <DashboardIcon />, link: "/something" },
-  { title: "Add Parkings", icon: <AddBoxIcon />, link: "/something" },
+  {
+    title: "Dashboard",
+    icon: <DashboardIcon />,
+    link: "/superAdmin-dashboard",
+  },
+  { title: "Add Parkings", icon: <AddBoxIcon />, link: "/add-parkinglot" },
   { title: "Logout", icon: <LogoutIcon />, link: "/login" },
 ];

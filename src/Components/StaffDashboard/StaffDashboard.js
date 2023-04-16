@@ -94,10 +94,6 @@ function StaffDashboard() {
       bookedParkingLot: parkingLotId,
       bookingId: data.booking._id,
     };
-
-    console.log(payload);
-    console.log("im successfully displayed");
-
     axios
       .post("/booking/close-booking", payload)
       .then((response) => {
@@ -392,30 +388,6 @@ function StaffDashboard() {
           </button>
         </div>
       </div>
-
-      {/* <div className="search-container">
-        <div className="grid-item-1">
-          <input
-            type="search"
-            className="form-control rounded"
-            placeholder="Enter Vehicle Plate Number"
-            aria-label="Search"
-            aria-describedby="search-addon"
-          />
-        </div>
-
-        <div className="grid-item-2">
-          <div>13</div>
-        </div>
-        <div className="grid-item-3">
-          <RefreshIcon />
-        </div>
-        <div className="col-sm-10"></div>
-        <div className="col-sm-1"></div>
-        <div className="col-sm-1">
-          <RefreshIcon />
-        </div>
-      </div> */}
       {profileCompletedPercentage === 100 ? (
         tableData.length > 0 ? (
           <BootstrapTable

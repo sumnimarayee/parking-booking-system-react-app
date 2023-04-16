@@ -1,6 +1,6 @@
 import Register from "./Components/UserRegister";
 import Login from "./Components/Login";
-import UserDashboard from "./Components/UserDashboard";
+import MapViewSelection from "./Components/MapViewSelection";
 import SuperAdminDashboard from "./Components/SuperAdminDashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddParkingLot from "./Components/AddParkingLot";
@@ -21,6 +21,7 @@ import BookingHistory from "./Components/BookingHistory";
 import UserProfileUpdate from "./Components/UserProfileUpdate/UserProfileUpdate";
 import ReviewForm from "./Components/Reviews/ReviewForm";
 import TotalReviews from "./Components/Reviews/TotalReviews";
+import UserDashboard from "./Components/UserDashboard/UserDashboard";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
 
@@ -46,6 +47,7 @@ function App() {
           {/* User specific routes */}
           <Route element={<RequireAuth roleName="isBookingUser" />}>
             <Route path="/user-dashboard" element={<UserDashboard />} />
+            <Route path="/map-view-selection" element={<MapViewSelection />} />
             <Route path="/book" element={<BookingInformation />} />
             <Route path="/time-selection" element={<TimeSelection />} />
             <Route path="/parking-payment" element={<ParkingPayment />} />

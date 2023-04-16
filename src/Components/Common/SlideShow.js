@@ -1,7 +1,6 @@
 import React from "react";
 import "../../styles/SlideShow.css";
 
-const colors = ["#0088FE", "#00C49F", "#FFBB28", "orange", "yellow"];
 const delay = 4500;
 
 const SlideShow = ({ images }) => {

@@ -79,20 +79,7 @@ function Login() {
             role,
             id,
           });
-          // localStorage.setItem("access_token", response.data.token);
-          // localStorage.setItem("refresh_token", response.data.refreshToken);
-          // if (response.isBookingUser) {
-          //   localStorage.setItem("role", "user");
-          //   //redirect
-          // }
-          // if (response.isStaff) {
-          //   localStorage.setItem("role", "staff");
-          // }
-          // if (response.isSuperAdmin) {
-          //   localStorage.setItem("role", "admin");
-          // }
           setLoader(false);
-          // navigate("/user-dashboard");
           if (role.isBookingUser) {
             navigate("/user-dashboard");
           } else if (role.isStaff) {
@@ -100,7 +87,6 @@ function Login() {
           } else if (role.isSuperAdmin) {
             navigate("/superAdmin-dashboard");
           }
-          // redirect to the appropriate landing page
         })
         .catch((error) => {
           setLoader(false);
