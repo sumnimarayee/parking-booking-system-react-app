@@ -26,9 +26,6 @@ const GEOFENCE = turf.circle([85.30014, 27.700769], 10, {
 
 export default function MapViewSelection() {
   const navigate = useNavigate();
-  // const [lat, setLat] = useState(27.700769);
-  // const [lng, setLng] = useState(85.30014);
-  // const [zoomLevel, setZoomLevel] = useState(6);
   const [viewState, setViewState] = useState({
     longitude: 85.30014,
     latitude: 27.700769,
@@ -40,13 +37,11 @@ export default function MapViewSelection() {
   const [showFilterBar, setShowFilterBar] = useState(false);
   const [avgRating, setAvgRating] = useState({});
 
-  // const [zoomLevel, setZoomLevel] = useState(12);
   const [loader, setLoader] = useState(false);
   const [priceFilterValues, setPriceFilterValues] = useState({
     vehicleType: "twoWheeler",
   });
   const [filterErrors, setFilterErrors] = useState({});
-  // const [errorPriceFilterValues, setErrorPriceFilterValues] = useState({});
 
   const updateLocationBySearch = (lng, lat) => {
     setViewState({
@@ -54,8 +49,6 @@ export default function MapViewSelection() {
       longitude: lng,
       latitude: lat,
     });
-    // setLat(lat);
-    // setLng(lng);
   };
 
   const axios = useAxiosPrivate();
@@ -66,7 +59,6 @@ export default function MapViewSelection() {
 
     const numberOnlyRegex = /^[0-9]*$/;
     const formError = {};
-    //validation
     if (priceFilterValues.minPrice) {
       if (!numberOnlyRegex.test(priceFilterValues.minPrice)) {
         formError.price =
@@ -114,7 +106,6 @@ export default function MapViewSelection() {
   useEffect(() => {
     setLoader(true);
     async function fetchData() {
-      // const headers = {'Authorization': 'Bearer ' + localStorage.getItem('access_token')};
       const response = await axios.get(`/parking-lot`);
       setParkingLots(response.data.data);
       setLoader(false);
@@ -124,18 +115,14 @@ export default function MapViewSelection() {
 
   const onMove = React.useCallback(({ viewState }) => {
     const newCenter = [viewState.longitude, viewState.latitude];
-    // console.log("newCentre =  " + JSON.stringify(newCenter));
     // Only update the view state if the center is inside the geofence
     if (turf.booleanPointInPolygon(newCenter, GEOFENCE)) {
-      console.log("INSIDE IFFFF");
-      // setViewState(newCenter);
       setViewState({
         ...viewState,
         longitude: newCenter[0],
         latitude: newCenter[1],
       });
     } else {
-      console.log("inside else");
       setViewState({
         ...viewState,
         longitude: 85.30014,
@@ -190,7 +177,6 @@ export default function MapViewSelection() {
               color: "rgb(117,117,117)",
               width: "1.5rem",
               height: "1.5rem",
-              // height: '2rem'
               padding: "0",
               margin: "0",
             }}
@@ -287,13 +273,7 @@ export default function MapViewSelection() {
           height: "90vh",
           borderRadius: "5px",
         }}
-        // initialViewState={{
-        //   latitude: lat,
-        //   longitude: lng,
-        // }}
         {...viewState}
-        // zoom={zoomLevel}
-        // onZoom={(e) => }
         onMove={onMove}
         mapStyle="mapbox://styles/mapbox/streets-v12"
       >
@@ -420,8 +400,6 @@ export default function MapViewSelection() {
               longitude: e.coords.longitude,
               latitude: e.coords.latitude,
             });
-            // setLng(e.coords.longitude);
-            // setLat(e.coords.latitude);
           }}
         />
         <Geocoder
@@ -431,8 +409,6 @@ export default function MapViewSelection() {
           updateSearchLocation={() => updateLocationBySearch}
         ></Geocoder>
       </ReactMapGL>
-      {/* <button onClick={() => navigate("/register")}>Click to Register</button>
-      <button onClick={() => navigate("/login")}>Click to go login</button> */}
     </div>
   );
 }

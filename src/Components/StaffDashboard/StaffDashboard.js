@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-// import { Table, Button } from "react-bootstrap";
 import "./StaffDashboard.css";
 import InfoIcon from "@mui/icons-material/Info";
-import RefreshIcon from "@mui/icons-material/Refresh";
 import { CSVLink } from "react-csv";
 import useAxiosprivate from "../../hooks/useAxiosPrivate";
 import useAuth from "../../hooks/useAuth";
@@ -44,7 +42,6 @@ function StaffDashboard() {
   const timeFormatter = (data, row) => {
     const startTime = data.split("-")[0];
     const endTime = data.split("-")[1];
-    // return <div onClick={() => console.log(row)}>email = {data}</div>;
     return (
       <div className="intable-column-time">
         <div className="start-time">{startTime}</div>
@@ -134,7 +131,6 @@ function StaffDashboard() {
           <button
             className="btn btn-outline-success"
             onClick={() => {
-              console.log("here");
               setModal({
                 show: true,
                 title: "Confirm Complete Booking",
@@ -211,7 +207,6 @@ function StaffDashboard() {
     );
     localStorage.setItem("profileCompletedPercentage", computedPercentage);
     setProfileCompletedPercentage(computedPercentage);
-    // console.log();
     localStorage.setItem("parkingLotId", response.data.data.parkingLot._id);
   };
   useEffect(() => {
@@ -394,9 +389,7 @@ function StaffDashboard() {
             data={tableData}
             columns={columns}
             keyField="_id"
-            //   {...props.baseProps}
             bootstrap4
-            //   headerClasses="table-header"
             hover
             condensed
             striped

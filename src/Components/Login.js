@@ -1,5 +1,4 @@
 import axios from "../api/axios";
-import { BASE_URL } from "../utils/Constants";
 import { useState } from "react";
 import LoginAndRegisterHeaderbar from "./Common/LoginAndRegisterHeaderbar";
 import { Link, useNavigate } from "react-router-dom";
@@ -57,7 +56,6 @@ function Login() {
     setFormErrors(err);
     if (Object.keys(err).length === 0) {
       setLoader(true);
-      // call backend login api here.
       const loginPayload = {
         email: formValues.email,
         password: formValues.password,
@@ -126,8 +124,6 @@ function Login() {
         <MDBCol sm="6">
           <div className="d-flex flex-row ps-5 pt-5">
             <LoginAndRegisterHeaderbar />
-            {/* <MDBIcon fas icon="crow fa-3x me-3" style={{ color: "#709085" }} /> */}
-            {/* <span className="h1 fw-bold mb-0">Logo</span> */}
           </div>
 
           <div className="d-flex flex-column justify-content-center h-custom-2 w-75 pt-4">
@@ -139,7 +135,6 @@ function Login() {
             </h3>
             <MDBInput
               wrapperClass="mx-5 w-100"
-              // label="Email address"
               id="formControlLg"
               placeholder="Enter your email address"
               type="email"
@@ -186,7 +181,6 @@ function Login() {
           <img
             // src="../assets/login-background.jpg"
             src={img}
-            // src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img3.webp"
             alt="Login image"
             className="w-100"
             style={{

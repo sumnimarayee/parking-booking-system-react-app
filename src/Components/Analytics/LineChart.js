@@ -8,8 +8,6 @@ import {
   PointElement,
   LineElement,
 } from "chart.js";
-import { useState } from "react";
-
 Chart.register(
   CategoryScale,
   LinearScale,
@@ -17,7 +15,6 @@ Chart.register(
   PointElement,
   LineElement
 );
-
 const options = {
   responsive: true,
   maintainAspectRatio: false,
@@ -50,7 +47,6 @@ const options = {
     },
   },
 };
-
 const LineChart = ({ label, dataSetData }) => {
   const data = {
     labels: label,
@@ -63,14 +59,6 @@ const LineChart = ({ label, dataSetData }) => {
         borderColor: "rgba(54, 162, 235, 1)",
         borderWidth: 1,
       },
-      //   {
-      //     label: "Expenses",
-      //     data: [28, 48, 40, 19, 86, 27, 90],
-      //     fill: false,
-      //     backgroundColor: "rgba(255, 99, 132, 0.5)",
-      //     borderColor: "rgba(255, 99, 132, 1)",
-      //     borderWidth: 1,
-      //   },
     ],
   };
   return <Line data={data} options={options} />;

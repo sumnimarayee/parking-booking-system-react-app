@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddParkingLot from "./Components/AddParkingLot";
 import BookingInformation from "./Components/BookingInformation";
 import TimeSelection from "./Components/TimeSelection";
-import Sidebar from "./Components/sidebar/Sidebar";
 import InitialUpdate from "./Components/StaffProfileUpdate/InitialUpdate";
 import StaffDashboard from "./Components/StaffDashboard/StaffDashboard";
 import Layout from "./Components/Layout";
@@ -15,7 +14,6 @@ import NotFound from "./Components/FallbackComponents/NotFound";
 import Unauthorized from "./Components/FallbackComponents/Unauthorized";
 import PersistLogin from "./Components/PersistLogin";
 import ParkingPayment from "./Components/ParkingPayment";
-import UsersTable from "./Components/Common/userTable";
 import Analytics from "./Components/Analytics/index";
 import BookingHistory from "./Components/BookingHistory";
 import UserProfileUpdate from "./Components/UserProfileUpdate/UserProfileUpdate";
@@ -24,11 +22,14 @@ import TotalReviews from "./Components/Reviews/TotalReviews";
 import UserDashboard from "./Components/UserDashboard/UserDashboard";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
+import { messaging } from "./utils/Firebase";
+import { getToken } from "firebase/messaging";
+import useAxiosprivate from "./hooks/useAxiosPrivate";
+import useAuth from "./hooks/useAuth";
 
 function App() {
   useEffect(() => {
-    console.log("inside the appjs useeffect");
-    const socket = io("http://localhost:3002");
+    // const socket = io("http://localhost:3002");
   }, []);
   return (
     <Routes>

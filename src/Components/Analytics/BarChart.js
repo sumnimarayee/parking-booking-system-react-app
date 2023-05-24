@@ -7,9 +7,7 @@ import {
   BarController,
   BarElement,
 } from "chart.js";
-
 Chart.register(CategoryScale, LinearScale, BarController, BarElement);
-
 const options = {
   responsive: true,
   maintainAspectRatio: false,
@@ -42,7 +40,6 @@ const options = {
     },
   },
 };
-
 const BarChart = ({ label, twoWheelerData, fourWheelerData }) => {
   const data = {
     labels: label,

@@ -2,7 +2,8 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 // import {ref} from "firebase/storage";
-// const imageRef = ref(storage, `images/${imageupload.name +}`)
+
+import { getMessaging } from "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAoL8sTBMTeMo1vBO5mhKoH4fOneCFaUAQ",
@@ -18,3 +19,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 export const storage = getStorage(app);
+export const messaging = getMessaging(app);

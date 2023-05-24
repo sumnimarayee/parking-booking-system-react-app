@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useAxiosprivate from "../hooks/useAxiosPrivate";
 import "../styles/ParkingPayment.css";
 import Loader from "./Common/Loader";
@@ -102,8 +102,6 @@ const ParkingPayment = () => {
             type: "success",
             navigateTo: "/user-dashboard",
           });
-          console.log(response);
-          //display modal stating the response.data.data.booking
         })
         .catch((err) => {
           setLoader(false);
