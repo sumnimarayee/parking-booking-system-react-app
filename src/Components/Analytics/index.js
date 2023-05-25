@@ -73,10 +73,10 @@ const Analytics = () => {
       navigate("/staff-dashboard");
     }
     const fetchAllChartInitially = async () => {
-      fetchRevenueData();
+      fetchTodayData();
       fetchTotalBookingsData();
       fetchPerHourBookingsData();
-      fetchTodayData();
+      fetchRevenueData();
     };
     fetchAllChartInitially();
   }, []);

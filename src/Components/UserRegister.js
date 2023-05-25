@@ -86,7 +86,6 @@ function Register() {
       axios
         .post(BASE_URL + "/register-user", registerPayload)
         .then((data) => {
-          console.log(data);
           setLoader(false);
           setModal({
             show: true,

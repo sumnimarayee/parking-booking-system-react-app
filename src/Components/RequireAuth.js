@@ -13,14 +13,8 @@ const RequireAuth = ({ roleName }) => {
         toggleSidebar={setDisplaySidebar}
         displaySidebar={displaySidebar}
       />
-      {/* <div className="row">
-        <div className="col-sm-3"> */}
       <Sidebar displaySidebar={displaySidebar} />
-      {/* </div>
-        <div className="col-sm-9"> */}
       <Outlet />
-      {/* </div>
-      </div> */}
     </>
   ) : auth?.access_token ? (
     <Navigate to="/unauthorized" />

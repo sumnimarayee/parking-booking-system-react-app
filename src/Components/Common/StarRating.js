@@ -34,7 +34,6 @@ const StarRating = ({ rating, size }) => {
   };
 
   const renderFirstStars = () => {
-    console.log(starStyle);
     const stars = [];
     for (let i = 1; i <= fullFirstStars; i++) {
       stars.push(<StarRateIcon key={i} style={starStyle} />);
@@ -60,7 +59,6 @@ const StarRating = ({ rating, size }) => {
 
   useEffect(() => {
     if (size) {
-      console.log("size is ===== " + size);
       setStarStyle({ ...starStyle, height: `${size}rem`, width: `${size}rem` });
     }
     setStars();

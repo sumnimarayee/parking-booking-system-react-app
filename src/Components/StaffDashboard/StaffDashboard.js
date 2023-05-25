@@ -195,8 +195,6 @@ function StaffDashboard() {
     prePageText: "<",
     showTotal: true,
     alwaysShowAllBtns: true,
-    onPageChange: (page, sizePerPage) => {},
-    onSizePerPageChange: (page, sizePerPage) => {},
   });
   const fetchParkingLot = async () => {
     const response = await axios.get(`parking-lot/staff/${auth.id}`);

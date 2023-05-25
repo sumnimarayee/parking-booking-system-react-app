@@ -68,7 +68,6 @@ const UserDashboard = () => {
     async function fetchData() {
       const response = await axios.get(`/parking-lot`);
       const fetchedParkingLots = response.data.data;
-      console.log(fetchedParkingLots);
       const parkingLots = await fetchAverageData(fetchedParkingLots);
       setParkingLots(parkingLots);
       setLoader(false);
@@ -130,30 +129,6 @@ const UserDashboard = () => {
                       </div>
                     </div>
                     <div>({selectedPark?.avgRating?.count}) Reviews</div>
-                    {/* <div
-                      className="review-icon-container"
-                      style={{
-                        position: "relative",
-                        top: "2px",
-                      }}
-                      onClick={() => {
-                        navigate(`/review/${selectedPark._id}`);
-                      }}
-                    >
-                      <RateReviewIcon style={{ color: "#7dff7d" }} />
-                    </div>
-                    <div
-                      className="view-ratings"
-                      style={{
-                        marginLeft: "4px",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => {
-                        navigate(`/view-reviews/${selectedPark._id}`);
-                      }}
-                    >
-                      <PreviewIcon style={{ color: "#7dff7d" }} />
-                    </div> */}
                   </div>
                   {isShopOpen(
                     selectedPark.openingTime,

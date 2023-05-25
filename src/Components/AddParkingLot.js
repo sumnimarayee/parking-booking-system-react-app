@@ -121,7 +121,6 @@ const AddParkingLot = () => {
         onMouseDown={(e) => {
           setDisplayPopup(false);
           setMarkerPosition({ ...e.lngLat });
-          // console.log(e.lngLat);
         }}
       >
         {markerPosition ? (
@@ -136,19 +135,6 @@ const AddParkingLot = () => {
         ) : (
           ""
         )}
-        {/* {markerPosition ? (
-          <Popup
-            latitude={markerPosition?.lat}
-            longitude={markerPosition?.lng}
-            closeOnClick={false}
-            onClose={() => {
-              setMarkerPosition({ lng: "", lat: "" });
-            }}
-            offset={20}
-          ></Popup>
-        ) : (
-          ""
-        )} */}
         <NavigationControl position="bottom-right" />
         <GeolocateControl
           position="top-left"

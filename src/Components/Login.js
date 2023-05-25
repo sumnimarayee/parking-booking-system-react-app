@@ -32,21 +32,23 @@ function Login() {
   const navigate = useNavigate();
   const validateLogin = () => {
     const errors = {};
-    if (!formValues.email) {
-      errors.email = "Email is required";
-    }
-    if (!formValues.password) {
-      errors.password = "Password is required";
-    }
-    if (formValues.password.length < 6) {
-      errors.password = "Password must be at least 6 characters";
-    }
     if (
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formValues.email) ===
       false
     ) {
       errors.email = "Invalid email format";
     }
+    if (!formValues.email) {
+      errors.email = "Email is required";
+    }
+    if (formValues.password.length < 6) {
+      errors.password = "Password must be at least 6 characters";
+    }
+
+    if (!formValues.password) {
+      errors.password = "Password is required";
+    }
+
     return errors;
   };
 

@@ -27,6 +27,8 @@ const Sidebar = ({ displaySidebar }) => {
               onClick={async () => {
                 val.title === "Logout" ? await logout() : console.log("");
                 if (val.link === "/view-reviews") {
+                  console.log("printing auth");
+                  console.log(auth);
                   val.link = val.link + `/${auth.parkingLotId}`;
                 }
                 navigate(val.link);

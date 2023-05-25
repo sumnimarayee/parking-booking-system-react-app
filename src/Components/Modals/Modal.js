@@ -16,7 +16,6 @@ function Modal({
   handleConfirmation,
   data,
 }) {
-  console.log("navigateTo ==== " + navigateTo);
   const navigate = useNavigate();
   useEffect(() => {
     if (hideAfterSeconds) {
@@ -29,15 +28,6 @@ function Modal({
     <div className="modalBackground">
       <div className="transparent-background"></div>
       <div className="modalContainer">
-        {/* <div className="titleCloseBtn">
-          <button
-            onClick={() => {
-              modal({ show: false });
-            }}
-          >
-            X
-          </button>
-        </div> */}
         {type === "success" ? (
           <div className="success-gif">
             <img src={successAnimation} />

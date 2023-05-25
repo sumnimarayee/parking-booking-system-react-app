@@ -311,14 +311,6 @@ export default function MapViewSelection() {
             onClose={() => {
               setSelectedPark(null);
             }}
-            // onMouseEnter={() => {
-            //   console.log("on mouse enter");
-            // }}
-            // onMouseLeave={(e) => {
-            //   console.log("on mouse leave");
-            //   e.preventDefault();
-            //   setSelectedPark(null);
-            // }}
             closeOnMove={false}
           >
             <div className="popup-container">

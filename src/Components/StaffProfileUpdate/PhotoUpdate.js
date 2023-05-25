@@ -12,8 +12,6 @@ import Loader from "../Common/Loader";
 import Modal from "../Modals/Modal";
 import { computeStaffProfileUpdatePercentage } from "../../utils/utility";
 
-//TODO: when components loads call the fetch parkinglot by id api and
-// save the image urls in the images state then continue
 const baseStyle = {
   flex: 1,
   display: "flex",
@@ -29,10 +27,6 @@ const baseStyle = {
   outline: "none",
   transition: "border .24s ease-in-out",
   height: "150px",
-
-  // position: "absolute",
-  // top: "20%",
-  // marginTop: " 20%",
 };
 
 const focusedStyle = {
@@ -82,12 +76,10 @@ function PhotoUpdate({ setProfileCompletedPercentage }) {
       })
       .catch((error) => {
         setLoader(false);
-        //display a modal stating error uploading a image
       });
   };
 
   const deletePhoto = (imageIndexToDelete) => {
-    console.log("here " + imageIndexToDelete);
     const allImageUrls = [...images];
     allImageUrls.splice(imageIndexToDelete, 1);
     setImages(allImageUrls);
@@ -142,17 +134,12 @@ function PhotoUpdate({ setProfileCompletedPercentage }) {
   } = useDropzone({
     accept: { "image/*": [] },
     onDrop: (acceptedFiles) => {
-      // at first start spinner
       // images must store the firebase url, check if the length exceeds 5, if exceeds stop here
       // if okay upload the file to the firebase and add the preview url to the images list
       const currentStoredImageNumber = images?.length || 0;
       const toStoreImageNumber = acceptedFiles?.length || 0;
       if (currentStoredImageNumber + toStoreImageNumber > 5) {
-        // show error modal
-        console.log("MORE THAN 5 NOT ALLOWED  ");
       } else {
-        //call function for firebase upload
-
         acceptedFiles.forEach(async (file) => {
           await uploadToFirebase(file);
         });

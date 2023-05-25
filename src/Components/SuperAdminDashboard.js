@@ -45,8 +45,6 @@ const SuperAdminDashboard = () => {
   }, []);
 
   const handleDeleteConfirmation = (data) => {
-    console.log("insdide handle detelete confirmation");
-    console.log(data);
     setModal({ show: false });
     setLoader(true);
     const parkinglotIdToDelete = data.parkingLot._id;
@@ -119,12 +117,10 @@ const SuperAdminDashboard = () => {
       dataField: "bikeParkingCapacity",
       text: "Two-Wheelers Capacity",
       sort: true,
-      sort: true,
     },
     {
       dataField: "carParkingCapacity",
       text: "Four-Wheelers Capacity",
-      sort: true,
       sort: true,
     },
     {
@@ -187,9 +183,7 @@ const SuperAdminDashboard = () => {
           data={tableData}
           columns={columns}
           keyField="_id"
-          //   {...props.baseProps}
           bootstrap4
-          //   headerClasses="table-header"
           hover
           condensed
           striped

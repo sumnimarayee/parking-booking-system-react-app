@@ -12,8 +12,6 @@ import PhotoUpdate from "./PhotoUpdate";
 import PasswordUpdate from "./PasswordUpdate";
 import CircularProgressBar from "../Common/CircularProgressBar";
 
-// TODO: iMPLEMENT the context api to store the staff id and fetch id from there
-
 const InitialUpdate = () => {
   const [displaySelectedComponent, setDisplaySelectedComponent] = useState(1);
   const [profileCompletedPercentage, setProfileCompletedPercentage] =
@@ -32,8 +30,6 @@ const InitialUpdate = () => {
         <div className="row">
           <div className="col-md-5 left-container">
             <h2>Update Information</h2>
-
-            {/* card */}
             <div className=" progress-card">
               <div className="progress-card-top">
                 <div
@@ -41,7 +37,6 @@ const InitialUpdate = () => {
                   style={{
                     width: 100,
                     height: 100,
-                    // display: "inline-block",
                     marginTop: "10px",
                     flexShrink: "1",
                   }}
@@ -74,8 +69,6 @@ const InitialUpdate = () => {
                 </button>
               </div>
             </div>
-
-            {/* list of clickable value */}
             <div className="action-item-holder">
               <ul>
                 <li>
@@ -168,7 +161,6 @@ const InitialUpdate = () => {
                 </li>
               </ul>
             </div>
-            {/* TODO add note at last for first update stating must provide all values */}
           </div>
           <div className="col-md-7 right-container">
             {displaySelectedComponent === 1 ? (

@@ -26,7 +26,6 @@ const PasswordUpdate = ({ setProfileCompletedPercentage }) => {
 
     setPasswordError(error);
     if (passwordError.length === 0) {
-      console.log(1);
       setLoader(true);
       const payload = {
         password: password,

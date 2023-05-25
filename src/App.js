@@ -54,8 +54,6 @@ function App() {
             <Route path="/parking-payment" element={<ParkingPayment />} />
             <Route path="/booking-history" element={<BookingHistory />} />
             <Route path="/review/:id" element={<ReviewForm />} />
-            {/* <Route path="/view-reviews/:id" element={<TotalReviews />} /> */}
-
             <Route
               path="/user-profile-update"
               element={<UserProfileUpdate />}
