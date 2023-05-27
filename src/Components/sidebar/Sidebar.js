@@ -26,10 +26,15 @@ const Sidebar = ({ displaySidebar }) => {
               className="SidebarRow"
               onClick={async () => {
                 val.title === "Logout" ? await logout() : console.log("");
-                if (val.link === "/view-reviews") {
-                  console.log("printing auth");
-                  console.log(auth);
-                  val.link = val.link + `/${auth.parkingLotId}`;
+                if (
+                  val.link === "/view-reviews" ||
+                  val.link === "/view-reviews-staff"
+                ) {
+                  val.link =
+                    val.link +
+                    `/${
+                      auth.parkingLotId || localStorage.getItem("parkingLotId")
+                    }`;
                 }
                 navigate(val.link);
               }}

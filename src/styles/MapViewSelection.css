@@ -164,6 +164,7 @@
 
 .price-filter-container input {
   width: 6rem;
+  background: white;
 }
 .price-filter-container select {
   width: 10rem;

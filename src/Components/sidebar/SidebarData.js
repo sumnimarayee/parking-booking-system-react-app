@@ -21,8 +21,7 @@ export const userSidebar = [
     icon: <ManageHistoryIcon />,
     link: "/booking-history",
   },
-  { title: "Notifications", icon: <NotificationsIcon />, link: "/review" },
-  { title: "Logout", icon: <LogoutIcon />, link: "/login" },
+  { title: "Logout", icon: <LogoutIcon />, link: "/" },
 ];
 export const staffSidebar = [
   { title: "Dashboard", icon: <DashboardIcon />, link: "/staff-dashboard" },
@@ -32,8 +31,12 @@ export const staffSidebar = [
     link: "/initial-update",
   },
   { title: "Analytics", icon: <BarChartIcon />, link: "/analytics" },
-  { title: "View Reviews", icon: <RateReviewIcon />, link: "/view-reviews" },
-  { title: "Logout", icon: <LogoutIcon />, link: "/login" },
+  {
+    title: "View Reviews",
+    icon: <RateReviewIcon />,
+    link: "/view-reviews-staff",
+  },
+  { title: "Logout", icon: <LogoutIcon />, link: "/" },
 ];
 export const superAdminSidebar = [
   {
@@ -42,5 +45,5 @@ export const superAdminSidebar = [
     link: "/superAdmin-dashboard",
   },
   { title: "Add Parkings", icon: <AddBoxIcon />, link: "/add-parkinglot" },
-  { title: "Logout", icon: <LogoutIcon />, link: "/login" },
+  { title: "Logout", icon: <LogoutIcon />, link: "/" },
 ];

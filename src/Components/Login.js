@@ -168,11 +168,6 @@ function Login() {
             >
               Submit
             </button>
-            <p className="small mb-5 pb-lg-3 ms-5">
-              <a className="text-muted" href="#!">
-                Forgot password?
-              </a>
-            </p>
             <p className="ms-5">
               Don't have an account? <Link to="/register">Register here</Link>
             </p>

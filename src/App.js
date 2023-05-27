@@ -19,6 +19,7 @@ import BookingHistory from "./Components/BookingHistory";
 import UserProfileUpdate from "./Components/UserProfileUpdate/UserProfileUpdate";
 import ReviewForm from "./Components/Reviews/ReviewForm";
 import TotalReviews from "./Components/Reviews/TotalReviews";
+import TotalReviewsStaff from "./Components/Reviews/TotalReviewsStaff";
 import UserDashboard from "./Components/UserDashboard/UserDashboard";
 import { useEffect } from "react";
 import PaymentSuccess from "./Components/Khalti/PaymentSuccess";
@@ -30,15 +31,18 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/view-reviews/:id" element={<TotalReviews />} />
         <Route element={<PersistLogin />}>
           {/* Staff specific routes */}
           <Route element={<RequireAuth roleName="isStaff" />}>
             <Route path="/initial-update" element={<InitialUpdate />} />
             <Route path="/staff-dashboard" element={<StaffDashboard />} />
             <Route path="/analytics" element={<Analytics />} />
+            <Route
+              path="/view-reviews-staff/:id"
+              element={<TotalReviewsStaff />}
+            />
           </Route>
 
           {/* User specific routes */}
@@ -51,6 +55,7 @@ function App() {
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/booking-history" element={<BookingHistory />} />
             <Route path="/review/:id" element={<ReviewForm />} />
+            <Route path="/view-reviews/:id" element={<TotalReviews />} />
             <Route
               path="/user-profile-update"
               element={<UserProfileUpdate />}

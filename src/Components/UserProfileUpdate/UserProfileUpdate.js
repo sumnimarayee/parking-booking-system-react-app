@@ -12,8 +12,6 @@ import { storage } from "../../utils/Firebase";
 const UserProfileUpdate = () => {
   const [formData, setFormData] = useState({
     name: "",
-    plateNumber: "",
-    vehicleType: "",
     gender: "",
     password: "",
     confirmPassword: "",
@@ -51,14 +49,15 @@ const UserProfileUpdate = () => {
     // setUser(user.data.data);
     setFormData({
       name: user.data.data.name,
-      plateNumber: user.data.data.plateNumber,
-      vehicleType: user.data.data.vehicleType,
       gender: user.data.data.gender,
-      email: user.data.data.email,
-      contactNumber: user.data.data.contactNumber,
+      email: user.data.data.email || "",
+      contactNumber: user.data.data.contactNumber || "",
       profilePicture: user.data.data.profilePictureURL,
       createdAt: user.data.data.createdAt,
+      password: "",
+      confirmPassword: "",
     });
+    setFormErrors({});
   };
 
   useEffect(() => {
@@ -82,7 +81,8 @@ const UserProfileUpdate = () => {
 
   const validateUpdate = () => {
     const errors = {};
-    if (formData.name) {
+    if (!formData.name) {
+      errors.name = "Provide user name";
     }
     if (formData.email) {
       const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -103,12 +103,6 @@ const UserProfileUpdate = () => {
         errors.password = "Password and confirm password must be same";
       } else if (formData.password.length < 6) {
         errors.password = "Password must be at least 6 characters";
-      }
-    }
-    if (formData.plateNumber) {
-      const regex = /^[0-9]{4}$/;
-      if (!regex.test(formData.plateNumber)) {
-        errors.plateNumber = "Plate number must contain only numbers";
       }
     }
 
@@ -135,12 +129,6 @@ const UserProfileUpdate = () => {
     }
     if (formData.contactNumber) {
       payload.contactNumber = formData.contactNumber;
-    }
-    if (formData.plateNumber) {
-      payload.plateNumber = formData.plateNumber;
-    }
-    if (formData.vehicleType) {
-      payload.vehicleType = formData.vehicleType;
     }
     if (formData.gender) {
       payload.gender = formData.gender;
@@ -179,7 +167,7 @@ const UserProfileUpdate = () => {
       )}
       <div className="row profile-update-sections">
         <div className="col-md-3 image-update-section">
-          <div className="image-update-section-header">Sunima Rai</div>
+          <div className="image-update-section-header">{formData.name}</div>
           <div className="form-group">
             <div
               className="image-wrapper"
@@ -215,7 +203,6 @@ const UserProfileUpdate = () => {
               </div>
             </div>
           </div>
-          <div className="image-update-section-footer">Member since: {}</div>
         </div>
         <div className="col-md-8 text-update-section">
           <h1>Update User Profile</h1>
@@ -232,6 +219,7 @@ const UserProfileUpdate = () => {
                 }}
               />
             </div>
+            <div className="form-error-message">{formErrors.name}</div>
             <div className="form-group">
               <label htmlFor="email">Email</label>
               <input
@@ -244,6 +232,7 @@ const UserProfileUpdate = () => {
                 }}
               />
             </div>
+            <div className="form-error-message">{formErrors.email}</div>
             <div className="update-form-dual-item-holder">
               <div className="form-group col-sm-6">
                 <label htmlFor="contact_number">Contact Number</label>
@@ -257,7 +246,6 @@ const UserProfileUpdate = () => {
                   }}
                 />
               </div>
-
               <div className="form-group col-sm-6">
                 <label htmlFor="gender">Gender</label>
                 <select
@@ -274,6 +262,7 @@ const UserProfileUpdate = () => {
                 </select>
               </div>
             </div>
+            <div className="form-error-message">{formErrors.contactNumber}</div>
             <div className="update-form-dual-item-holder">
               <div className="form-group col-sm-6">
                 <label htmlFor="password">Password</label>
@@ -303,37 +292,7 @@ const UserProfileUpdate = () => {
                 />
               </div>
             </div>
-
-            <div className="update-form-dual-item-holder">
-              <div className="form-group col-sm-6">
-                <label htmlFor="plate_number">Plate Number</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="plate_number"
-                  value={formData.plateNumber}
-                  onChange={(e) => {
-                    setFormData({ ...formData, plateNumber: e.target.value });
-                  }}
-                />
-              </div>
-              <div className="form-group col-sm-6">
-                <label htmlFor="vehicle_type">Vehicle Type</label>
-                <select
-                  className="form-control"
-                  id="vehicle_type"
-                  value={formData.vehicleType}
-                  onChange={(e) => {
-                    setFormData({ ...formData, vehicleType: e.target.value });
-                  }}
-                >
-                  <option value="">Select Vehicle Type</option>
-                  <option value="TWO_WHEELER">Two Wheeler</option>
-                  <option value="FOUR_WHEELER">Four Wheeler</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-            </div>
+            <div className="form-error-message">{formErrors.password}</div>
 
             <button className="btn btn-primary" onClick={() => handleUpdate()}>
               Update Profile

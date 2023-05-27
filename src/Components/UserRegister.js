@@ -26,8 +26,6 @@ function Register() {
     password: "",
     contactNo: "",
     gender: "",
-    vehicleType: "",
-    plateNumber: "",
   };
 
   const [formValues, setFormValues] = useState(initialFormValues);
@@ -56,13 +54,6 @@ function Register() {
     if (!formValues.gender) {
       errors.gender = "gender is required";
     }
-    if (!formValues.vehicleType) {
-      errors.vehicleType = "vehicle type is required";
-    }
-
-    if (!formValues.plateNumber) {
-      errors.plateNumber = "plate number is required";
-    }
 
     return errors;
   };
@@ -80,7 +71,6 @@ function Register() {
         role: "user",
         contactNo: formValues.contactNo,
         gender: formValues.gender,
-        vehicleType: formValues.vehicleType,
       };
 
       axios
@@ -94,7 +84,7 @@ function Register() {
             type: "success",
           });
           setTimeout(() => {
-            navigate("/login");
+            navigate("/");
           }, 3000);
         })
         .catch((err) => {
@@ -246,47 +236,6 @@ function Register() {
                         {formErrors.gender}
                       </div>
                     </div>
-                    <div>
-                      <select
-                        className="form-select"
-                        aria-label="Select Vehicle Type"
-                        value={formValues.vehicleType}
-                        onChange={(e) => {
-                          setFormValues({
-                            ...formValues,
-                            vehicleType: e.target.value,
-                          });
-                        }}
-                      >
-                        <option value="" disabled>
-                          select vehicle-Type
-                        </option>
-                        <option value="TWO_WHEELER">2 Wheeler</option>
-                        <option value="FOUR_WHEELER">4 Wheeler</option>
-                      </select>
-                      <div className="form-error-message  ">
-                        {formErrors.vehicleType}
-                      </div>
-                    </div>
-                    <div className="form-group my-3">
-                      <label htmlFor="InputPlateNo">Plate Number</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="InputPlateNo"
-                        value={formValues.plateNumber}
-                        onChange={(e) =>
-                          setFormValues({
-                            ...formValues,
-                            plateNumber: e.target.value,
-                          })
-                        }
-                        placeholder="Enter plate number"
-                      />
-                      <div className="form-error-message  ">
-                        {formErrors.plateNumber}
-                      </div>
-                    </div>
                     <button
                       type="submit"
                       className="btn btn-primary my-3 col-3 me-2"
@@ -305,7 +254,7 @@ function Register() {
                     </button>
                   </form>
                   <p className="ms-5">
-                    Already have an account? <Link to="/login">Login</Link>
+                    Already have an account? <Link to="/">Login</Link>
                   </p>
                 </MDBCardBody>
               </MDBCol>
