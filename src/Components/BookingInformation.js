@@ -8,6 +8,7 @@ import BikeIcon from "@mui/icons-material/TwoWheeler";
 import { TimePicker } from "react-ios-time-picker";
 import Loader from "./Common/Loader";
 import Modal from "./Modals/Modal";
+import Khalti from "./Khalti/Khalti";
 const moment = require("moment");
 
 const BookingInformation = () => {
@@ -23,12 +24,41 @@ const BookingInformation = () => {
   const [formError, setFormError] = useState({});
   const [loader, setLoader] = useState(false);
   const [modal, setModal] = useState({});
-
+  const [selectedVehicleType, setSelectedVehicleType] = useState("");
+  const [khaltiStatus, setKhaltiStatus] = useState(false);
   const handleStartTimeChange = (time) => {
     setSelectedStartTime(time);
   };
   const handleEndTimeChange = (time) => {
     setSelectedEndTime(time);
+  };
+
+  useEffect(() => {
+    checkAfterTimeChange();
+  }, [selectedStartTime, selectedEndTime]);
+
+  useEffect(() => {
+    if (vehiclePlateNumber.length == 4) {
+      const errors = validateInput();
+      if (Object.keys(errors).length === 0) {
+        setKhaltiStatus(true);
+        setToLocalStorage();
+      } else {
+        setKhaltiStatus(false);
+      }
+    } else {
+      setKhaltiStatus(false);
+    }
+  }, [vehiclePlateNumber]);
+
+  const checkAfterTimeChange = () => {
+    const errors = validateInput();
+    if (Object.keys(errors).length === 0) {
+      setKhaltiStatus(true);
+      setToLocalStorage();
+    } else {
+      setKhaltiStatus(false);
+    }
   };
 
   const validateInput = () => {
@@ -66,18 +96,7 @@ const BookingInformation = () => {
     return error;
   };
 
-  const loadPaymentPage = () => {
-    const errors = validateInput();
-    if (Object.keys(errors).length === 0) {
-      localStorage.setItem("userSelectedStartTime", selectedStartTime);
-      localStorage.setItem("userSelectedEndTime", selectedEndTime);
-      localStorage.setItem(
-        "userSelectedVehiclePlateNumber",
-        vehiclePlateNumber
-      );
-      navigate("/parking-payment");
-    }
-  };
+  const loadPaymentPage = () => {};
 
   const navigate = useNavigate();
   const axios = useAxiosprivate();
@@ -95,6 +114,23 @@ const BookingInformation = () => {
     }
     fetch();
   }, []);
+
+  const calculateTotalCost = (startTime, endTime, pricePerHour) => {
+    const start = startTime.split(":");
+    const end = endTime.split(":");
+    const totalHour = end[0] - start[0];
+    const totalMinute = end[1] - start[1];
+    const totalHourCost = totalHour * pricePerHour;
+    const totalMinuteCost = (pricePerHour / 60) * totalMinute;
+    const totalCost = totalHourCost + totalMinuteCost;
+    return Math.floor(totalCost * 100);
+  };
+
+  const setToLocalStorage = () => {
+    localStorage.setItem("userSelectedStartTime", selectedStartTime);
+    localStorage.setItem("userSelectedEndTime", selectedEndTime);
+    localStorage.setItem("userSelectedVehiclePlateNumber", vehiclePlateNumber);
+  };
   return (
     <div className="booking-information-container">
       {loader ? <Loader /> : ""}
@@ -149,6 +185,7 @@ const BookingInformation = () => {
                       "userSelectedVehicleType",
                       "fourWheeler"
                     );
+                    setSelectedVehicleType("fourWheeler");
                     setDisplayTimePicker(true);
                   }
                 }}
@@ -169,6 +206,7 @@ const BookingInformation = () => {
                       "userSelectedVehicleType",
                       "twoWheeler"
                     );
+                    setSelectedVehicleType("twoWheeler");
                     setDisplayTimePicker(true);
                   }
                 }}
@@ -228,19 +266,26 @@ const BookingInformation = () => {
             <div className="form-error-message">{formError.plateNumber}</div>
           </div>
           <div className="button-container">
-            <button
+            {/* <button
               type="button"
               className="btn btn-outline-secondary"
               onClick={() => loadPaymentPage()}
             >
-              Next
-            </button>
+            </button> */}
+            <Khalti
+              disabled={khaltiStatus ? false : true}
+              amount={calculateTotalCost(
+                selectedStartTime,
+                selectedEndTime,
+                selectedVehicleType === "twoWheeler"
+                  ? parkingLot.bikeParkingCostPerHour
+                  : parkingLot.carParkingCostPerHour
+              )}
+            ></Khalti>
             <button
               type="button"
               className="btn btn-outline-danger"
               onClick={() => {
-                setSelectedStartTime("10:00");
-                setSelectedEndTime("10:00");
                 setDisplayTimePicker(false);
                 setFormError({});
               }}

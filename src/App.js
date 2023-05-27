@@ -21,11 +21,7 @@ import ReviewForm from "./Components/Reviews/ReviewForm";
 import TotalReviews from "./Components/Reviews/TotalReviews";
 import UserDashboard from "./Components/UserDashboard/UserDashboard";
 import { useEffect } from "react";
-import { io } from "socket.io-client";
-import { messaging } from "./utils/Firebase";
-import { getToken } from "firebase/messaging";
-import useAxiosprivate from "./hooks/useAxiosPrivate";
-import useAuth from "./hooks/useAuth";
+import PaymentSuccess from "./Components/Khalti/PaymentSuccess";
 
 function App() {
   useEffect(() => {
@@ -52,6 +48,7 @@ function App() {
             <Route path="/book" element={<BookingInformation />} />
             <Route path="/time-selection" element={<TimeSelection />} />
             <Route path="/parking-payment" element={<ParkingPayment />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/booking-history" element={<BookingHistory />} />
             <Route path="/review/:id" element={<ReviewForm />} />
             <Route
