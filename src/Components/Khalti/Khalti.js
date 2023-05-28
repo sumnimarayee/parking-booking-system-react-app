@@ -46,15 +46,8 @@ export default function Khalti({ amount, disabled }) {
         navigate("/payment-success");
       })
       .catch((err) => {
+        navigate("/payment-error");
         setLoader(false);
-        setModal({
-          show: true,
-          title: "Booking Failed!!",
-          message: err.response.data.message,
-          type: "failure",
-          navigateTo: "/book",
-        });
-        console.log(err);
       });
   };
   let config = {
@@ -66,8 +59,6 @@ export default function Khalti({ amount, disabled }) {
     eventHandler: {
       onSuccess(payload) {
         // hit merchant api for initiating verfication
-        console.log(payload);
-        console.log("success fully done");
         axios
           .get(
             `/payments/khalti/${payload.token}/${payload.amount}/${myKey.secretkey}`
@@ -82,7 +73,6 @@ export default function Khalti({ amount, disabled }) {
       // onError handler is optional
       onError(error) {
         // handle errors
-        console.log(error);
       },
       onClose() {
         console.log("widget is closing");

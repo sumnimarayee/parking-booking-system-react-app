@@ -73,7 +73,6 @@ const BookingHistory = () => {
       <div className="booking-card-container">
         {bookings?.map((booking, index) => {
           {
-            console.log("im here");
           }
           return (
             <div className="booking-card" key={index}>

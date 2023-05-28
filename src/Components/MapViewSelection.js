@@ -76,7 +76,9 @@ export default function MapViewSelection() {
       priceFilterValues.maxPrice &&
       Object.keys(formError).length === 0
     ) {
-      if (priceFilterValues.minPrice > priceFilterValues.maxPrice) {
+      if (
+        Number(priceFilterValues.minPrice) > Number(priceFilterValues.maxPrice)
+      ) {
         formError.price = "Min price cannot be greater than max price";
       }
     }
@@ -133,7 +135,6 @@ export default function MapViewSelection() {
   }, []);
 
   function isShopOpen(openingTime, closingTime, currentTime) {
-    console.log(openingTime, closingTime, currentTime);
     const openingHour = parseInt(openingTime.split(":")[0]);
     const openingMinute = parseInt(openingTime.split(":")[1]);
     const closingHour = parseInt(closingTime.split(":")[0]);

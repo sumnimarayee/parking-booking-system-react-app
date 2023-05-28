@@ -35,8 +35,6 @@ exports.computeStaffProfileUpdatePercentage = (updatedItems) => {
     percentage += 10;
   }
 
-  console.log("COMPUTED PERCENTAGE =  " + percentage);
-
   return percentage;
 };
 

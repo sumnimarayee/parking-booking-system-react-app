@@ -5,8 +5,6 @@ import "../../styles/Navbar.css";
 
 const Navbar = ({ toggleSidebar, displaySidebar }) => {
   const handleToggleSidebar = () => {
-    console.log("now displaySidebar is " + displaySidebar);
-
     toggleSidebar(!displaySidebar);
   };
   return (

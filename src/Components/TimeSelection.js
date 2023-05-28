@@ -46,7 +46,6 @@ const TimeSelection = () => {
     const startingTime = startTime.split(":").join(".");
     const endingTime = endTime.split(":").join(".");
     const thirtyMinutesAddedToStartTime = addTime(startingTime, 30);
-    console.log(thirtyMinutesAddedToStartTime + " " + endingTime);
     if (startingTime >= endingTime) {
       errors.comparisionTime = "Start time must less than end time";
     } else if (Number(endingTime) < Number(thirtyMinutesAddedToStartTime)) {
@@ -55,7 +54,6 @@ const TimeSelection = () => {
     }
 
     setErrors(errors);
-    console.log(Object.keys(errors));
     if (Object.keys(errors).length === 0) {
       navigate("/parking-payment", {
         state: {

@@ -22,7 +22,6 @@ const ReviewForm = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    console.log("handle submit called");
     e.preventDefault();
     setLoader(true);
     const errors = {};

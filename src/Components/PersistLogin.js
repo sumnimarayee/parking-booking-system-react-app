@@ -21,9 +21,6 @@ const PersistLogin = () => {
       const payload = {
         notificationToken: token,
       };
-      console.log("token = " + token);
-      console.log("auth");
-      console.log(auth.id);
       await axios.patch(`/notifications/${auth.id}`, payload);
     }
   }

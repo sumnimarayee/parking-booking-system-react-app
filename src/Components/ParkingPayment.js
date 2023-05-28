@@ -83,7 +83,6 @@ const ParkingPayment = () => {
         vehiclePlateNo,
         bookedTime: `${startTime}-${endTime}`,
       };
-      console.log(bookingPayload);
 
       axios
         .post(`/booking`, bookingPayload)
